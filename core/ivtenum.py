@@ -57,7 +57,7 @@ EnemyMaterialToString = {
 	EnemyMaterial.Energy: "能量"
 }
 
-@unique
+
 class WeaponPropertyType(Enum):
 	'''
 	武器属性类型

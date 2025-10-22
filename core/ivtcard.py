@@ -17,9 +17,12 @@ class WeaponCardExclusive(WeaponCardBase):
     独占类武器执行卡，只能根据名字装备在特定的武器上
     混淆武器执行卡和武器专属执行卡都属于这类
     '''
-    def __init__(self):
+    def __init__(self, name: str, weaponName : str, slot : Slot, cost : int):
         super().__init__()
-        self.weaponName = ""
+        self.name = name
+        self.weaponName = weaponName
+        self.slot = slot
+        self.cost = cost
 
 class WeaponCardWithProperty(WeaponCardBase):
     '''
@@ -64,14 +67,3 @@ class WeaponCardRiven(WeaponCardWithProperty, WeaponCardExclusive):
         self.slot = slot
         self.cost = cost
         self.properties = properties
-
-class CardWeaponExclusive(WeaponCardExclusive):
-    '''
-    武器专属执行卡
-    '''
-    def __init__(self, name: str, weaponName : str, slot : Slot, cost : int):
-        super().__init__()
-        self.name = name
-        self.weaponName = weaponName
-        self.slot = slot
-        self.cost = cost

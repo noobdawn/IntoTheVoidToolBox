@@ -1,0 +1,133 @@
+import json
+import os
+from .ivtcard import WeaponCardCommon, WeaponCardRiven, WeaponCardExclusive
+from .ivtenum import WeaponPropertyType, WeaponType, SubWeaponType, CardSet, Slot
+from .ivtproperty import WeaponProperty
+
+COMMON_CARD_JSON_PATH = 'data/cards.json'
+RIVEN_CARD_JSON_PATH = 'data/rivenS.json'
+EXCLUSIVE_CARD_JSON_PATH = 'data/exclusive.json'
+
+ALL_CARDS = None
+
+def load_cards():
+    global ALL_CARDS
+    if ALL_CARDS is None:
+        ALL_CARDS = _load_common_cards() + _load_riven_cards() + _load_exclusive_cards()
+    return ALL_CARDS
+
+def _load_common_cards():
+    try:
+        with open(COMMON_CARD_JSON_PATH, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"载入普通执行卡失败: {e}")
+        return []
+
+    common_cards = []
+    for cardData in data:
+        # 解析属性
+        properties = []
+        for propData in cardData.get('properties', []):
+            try:
+                propertyType = WeaponPropertyType[propData['type']]
+                propertyValue = propData['value']
+                properties.append(WeaponProperty.createModProperty(propertyType, propertyValue))
+            except (KeyError, ValueError) as e:
+                print(f"警告: 在卡牌 '{cardData['name']}' 中遇到未知的属性类型 '{propertyTypeStr}'。已跳过。")
+                continue
+
+        # 解析武器类型
+        try:
+            weaponType = WeaponType.fromString(cardData.get('mainWeapon', 'All'))
+        except KeyError as e:
+            weaponType = WeaponType.All
+        try:
+            subWeaponType = SubWeaponType.fromString(cardData.get('subWeapon', 'All'))
+        except KeyError as e:
+            subWeaponType = SubWeaponType.Null
+
+        # 解析卡牌套装
+        cardSetStr = cardData.get('cardSet')
+        cardSet = CardSet[cardSetStr] if cardSetStr and cardSetStr in CardSet.__members__ else CardSet.Unset
+
+        # 解析极性
+        slotValue = cardData.get('slot', 0)
+        slot = Slot(slotValue)
+
+        card = WeaponCardCommon(
+            name=cardData['name'],
+            properties=properties,
+            weaponType=weaponType,
+            subWeaponType=subWeaponType,
+            cardSet=cardSet,
+            slot=slot,
+            cost=cardData.get('cost', 0)
+        )
+        common_cards.append(card)
+    return common_cards
+
+
+def _load_riven_cards():
+    try:
+        with open(RIVEN_CARD_JSON_PATH, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"载入裂隙执行卡失败: {e}")
+        return []
+
+    riven_cards = []
+    for cardData in data:
+        # 解析属性
+        properties = []
+        for propData in cardData.get('properties', []):
+            try:
+                propertyType = WeaponPropertyType[propData['type']]
+                propertyValue = propData['value']
+                properties.append(WeaponProperty.createModProperty(propertyType, propertyValue))
+            except (KeyError, ValueError) as e:
+                print(f"警告: 在裂隙卡牌 '{cardData['name']}' 中遇到未知的属性类型 '{propData.get('type')}'。已跳过。")
+                continue
+
+        # 解析极性
+        slotValue = cardData.get('slot', 0)
+        slot = Slot(slotValue)
+
+        # 解析武器名称
+        weaponName = cardData.get('weaponName')
+        if not weaponName:
+            print(f"警告: 裂隙卡牌缺少武器名称。已跳过。")
+            continue
+
+        card = WeaponCardRiven(
+            name=cardData['name'],
+            properties=properties,
+            weaponName=weaponName,
+            slot=slot,
+            cost=cardData.get('cost', 0)
+        )
+        riven_cards.append(card)
+    return riven_cards
+
+def _load_exclusive_cards():
+    try:
+        with open(EXCLUSIVE_CARD_JSON_PATH, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"载入专属执行卡失败: {e}")
+        return []
+
+    exclusive_cards = []
+    for cardData in data:
+        # 解析极性
+        slotValue = cardData.get('slot', 0)
+        slot = Slot(slotValue)
+
+        card = WeaponCardExclusive(
+            name=cardData['name'],
+            weaponName=cardData['weaponName'],
+            slot=slot,
+            cost=cardData.get('cost', 0)
+        )
+        exclusive_cards.append(card)
+    return exclusive_cards

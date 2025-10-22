@@ -2,18 +2,19 @@ import sys
 from PyQt5.QtWidgets import QApplication, QSplashScreen
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
+from core.ivtcontext import IVTContext
 
 QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
 
 def main():
-    from core.ivtproperty import WeaponPropertySnapshot
+    app = QApplication(sys.argv)
 
-    s0 = WeaponPropertySnapshot([], False)
-    import copy
-    s1 = copy.deepcopy(s0)
-    s1.test()
-    s0.print()
-    s1.print()
+    splash_pix = QPixmap('assets/splash/splash.jpg')
+    splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
+    splash.showMessage("正在启动...", Qt.AlignBottom | Qt.AlignCenter, Qt.white)
+    splash.show()
+
+    context = IVTContext()
 
     pass
 

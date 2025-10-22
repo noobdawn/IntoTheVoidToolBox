@@ -7,10 +7,10 @@ class PropertyData:
     属性对，包含基础值和加成值
     '''
     def __init__(self):
-        self.__datas = np.zeros((len(WeaponPropertyType), 2), dtype=np.float64)
+        self._datas = np.zeros((len(WeaponPropertyType), 2), dtype=np.float64)
 
     def __add__(self, other):
-        self.__datas += other.__datas
+        self._datas += other._datas
         return self
     
     def getDamageArray(self) -> np.ndarray:
@@ -19,7 +19,7 @@ class PropertyData:
         '''
         damage_array = np.zeros(10, dtype=np.float64)
         for i in range(10):
-            damage_array[i] = self.__datas[i][0] * (1 + self.__datas[i][1] / 100)
+            damage_array[i] = self._datas[i][0] * (1 + self._datas[i][1] / 100)
         return damage_array
     
     def getValue(self, propertyType : WeaponPropertyType) -> float:
@@ -27,21 +27,21 @@ class PropertyData:
         获取指定类型的属性值
         '''
         idx = propertyType.value
-        return self.__datas[idx][0]
+        return self._datas[idx][0]
     
     def getAddon(self, propertyType : WeaponPropertyType) -> float:
         '''
         获取指定类型的属性加成值
         '''
         idx = propertyType.value
-        return self.__datas[idx][1]
+        return self._datas[idx][1]
     
     def get(self, propertyType : WeaponPropertyType) -> float:
         '''
         获取指定类型的属性总值
         '''
         idx = propertyType.value
-        return self.__datas[idx][0] * (1 + self.__datas[idx][1] / 100)
+        return self._datas[idx][0] * (1 + self._datas[idx][1] / 100)
     
     def setFinalValue(self, propertyType : WeaponPropertyType, finalValue : float):
         '''
@@ -49,8 +49,8 @@ class PropertyData:
         仅用于百分比转化为实际数值的情况
         '''
         idx = propertyType.value
-        self.__datas[idx][0] = finalValue
-        self.__datas[idx][1] = 0.0
+        self._datas[idx][0] = finalValue
+        self._datas[idx][1] = 0.0
 
 class WeaponProperty(PropertyData):
     '''
@@ -59,8 +59,8 @@ class WeaponProperty(PropertyData):
     '''
     def __init__(self, propertyType : WeaponPropertyType, value: float = 0.0, addon: float = 0.0, from_mod=False):
         super().__init__()
-        self.__datas[propertyType.value][0] = value
-        self.__datas[propertyType.value][1] = addon
+        self._datas[propertyType.value][0] = value
+        self._datas[propertyType.value][1] = addon
         self.propertyType = propertyType
         self.from_mod = from_mod
 
@@ -68,34 +68,34 @@ class WeaponProperty(PropertyData):
         '''
         获取属性的总值
         '''
-        return self.__datas[self.propertyType.value][0] * (1 + self.__datas[self.propertyType.value][1] / 100)
+        return self._datas[self.propertyType.value][0] * (1 + self._datas[self.propertyType.value][1] / 100)
     
     def clear(self):
         '''
         清除属性值
         '''
-        self.__datas[self.propertyType.value][0] = 0.0
-        self.__datas[self.propertyType.value][1] = 0.0
+        self._datas[self.propertyType.value][0] = 0.0
+        self._datas[self.propertyType.value][1] = 0.0
 
     def getValue(self) -> float:
         '''
         获取属性的基础值
         '''
-        return self.__datas[self.propertyType.value][0]
+        return self._datas[self.propertyType.value][0]
     
     def getAddon(self) -> float:
         '''
         获取属性的加成值
         '''
-        return self.__datas[self.propertyType.value][1]
+        return self._datas[self.propertyType.value][1]
 
     def __add__(self, other):
         if self.propertyType != other.propertyType:
             raise ValueError("无法将不同类型的属性相加")
         if other.getValue() != 0.0 and self.getValue() != 0.0:
             raise ValueError("属性不能同时拥有基础值和加成")
-        self.__datas[self.propertyType.value][0] += other.getValue()
-        self.__datas[self.propertyType.value][1] += other.getAddon()
+        self._datas[self.propertyType.value][0] += other.getValue()
+        self._datas[self.propertyType.value][1] += other.getAddon()
         return self
     
     def switchPropertyType(self, newPropertyType : WeaponPropertyType):
