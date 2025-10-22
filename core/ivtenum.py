@@ -106,13 +106,12 @@ class WeaponPropertyType(Enum):
 	# 自动瞄准范围
 	AimAssistRange = 26
 	# 空中暴击率
-	CriticalChanceInAir = 100
+	CriticalChanceInAir = 27
 	# 空中元素伤害
-	ColdInAir = 101
-	ElectricInAir = 102
-	FireInAir = 103
-	PoisonInAir = 104
-
+	ColdInAir = 28
+	ElectricInAir = 29
+	FireInAir = 30
+	PoisonInAir = 31
 
 	def isBaseElementDamage(self):
 		'''判断是否是基础元素伤害'''
@@ -128,6 +127,10 @@ class WeaponPropertyType(Enum):
 		'''判断是否是伤害类型'''
 		# 伤害类型是指动能伤害和元素伤害
 		return self.value <= 10
+	
+	def isAirProperty(self):
+		'''判断是否是空中才生效的属性'''
+		return self in [WeaponPropertyType.CriticalChanceInAir, WeaponPropertyType.ColdInAir, WeaponPropertyType.ElectricInAir, WeaponPropertyType.FireInAir, WeaponPropertyType.PoisonInAir]
 	
 	def __str__(self):
 		if self in WeaponPropertyTypeToString:
@@ -540,7 +543,7 @@ SlotToText = {
 @unique
 class WeaponRivenRange(Enum):
 	'''
-	裂罅MOD的条目组合类型，会影响最终属性的浮动范围
+	混淆MOD的条目组合类型，会影响最终属性的浮动范围
 	'''
 	PP = 0
 	PPN = 1
@@ -551,7 +554,7 @@ class WeaponRivenRange(Enum):
 		if self in RivenRangeToString:
 			return RivenRangeToString[self]
 		else:
-			raise ValueError(f"未知裂罅MOD条目组合类型: {self.value}")
+			raise ValueError(f"未知混淆MOD条目组合类型: {self.value}")
 
 RivenRangeToString = {
 	WeaponRivenRange.PP: "2 增益 0 减益",
@@ -670,7 +673,7 @@ WeaponRivenRangeParams = {
 	WeaponRivenRange.PPPN: 0.94,
 }
 
-# 可作为裂罅MOD属性的武器属性类型
+# 可作为混淆MOD属性的武器属性类型
 AvailableWeaponRivenProperties = [
 	WeaponPropertyType.AllDamage,
 	WeaponPropertyType.Headshot,

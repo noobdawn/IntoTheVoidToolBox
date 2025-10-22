@@ -1,0 +1,20 @@
+[
+    {
+        "name": "特斯拉感生步枪 精密",
+        "properties": [
+            {
+                "type": "CriticalChance",
+                "value": 131.0
+            },
+            {
+                "type": "Headshot",
+                "value": 127.0
+            }
+        ],
+        "cost": 15,
+        "slot": 0,
+        "mainWeapon": "All",
+        "subWeapon": "All",
+        "weaponName": "特斯拉感生步枪"
+    }
+]
