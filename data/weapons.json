@@ -1,0 +1,278 @@
+[
+    {
+        "name": "私法 水滴",
+        "basename": "水滴",
+        "type": "Rifle",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Ether",
+                "value": 31.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 26.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 170.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 17.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 8.5
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 32
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.7
+            },
+            {
+                "type": "PenetrationRate",
+                "value": 80
+            }
+        ]
+    },
+    {
+        "name": "私法 大角星",
+        "basename": "大角星",
+        "type": "Rifle",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 25.0
+            },
+            {
+                "type": "Cold",
+                "value": 35.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 19.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 210.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 27.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 6.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 20
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.9
+            }
+        ]
+    },
+    {
+        "name": "聚焦矿灯",
+        "basename": "聚焦矿灯",
+        "type": "Rifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Electric",
+                "value": 10.0
+            },
+            {
+                "type": "Cracking",
+                "value": 9.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 190.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 16.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 10.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 35
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.0
+            }
+        ]
+    },
+    {
+        "name": "私法 冰封瀑",
+        "basename": "冰封瀑",
+        "type": "Shotgun",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Cold",
+                "value": 18.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 24.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 170.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 8.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 7.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 3.5
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 15
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.2
+            }
+        ]
+    },
+    {
+        "name" : "特斯拉感生步枪",
+        "basename" : "特斯拉感生步枪",
+        "type" : "Rifle",
+        "isPrime" : false,
+        "properties" : [
+            {
+                "type" : "Magnetic",
+                "value" : 522.0
+            },
+            {
+                "type" : "CriticalChance",
+                "value" : 17.0
+            },
+            {
+                "type" : "CriticalDamage",
+                "value" : 190.0
+            },
+            {
+                "type" : "MultiStrike",
+                "value" : 1.0
+            },
+            {
+                "type" : "TriggerChance",
+                "value" : 30.0
+            },
+            {
+                "type" : "AttackSpeed",
+                "value" : 0.8
+            },
+            {
+                "type" : "DebuffDuration",
+                "value" : 100.0
+            },
+            {
+                "type" : "MagazineSize",
+                "value" : 8
+            },
+            {
+                "type" : "ReloadTime",
+                "value" : 2.5
+            }
+        ]
+    },
+    {
+        "name": "噪波",
+        "basename": "噪波",
+        "type": "Pistol",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Electric",
+                "value": 28.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 23.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 220.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 20.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 12.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 60
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.2
+            }
+        ]
+    }
+]

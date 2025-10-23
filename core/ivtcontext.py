@@ -1,6 +1,6 @@
 from PyQt5.QtCore import QObject, pyqtSignal
 from pynput import keyboard
-from .loader import load_cards
+from .loader import load_cards, load_weapons
 
 class UISignals(QObject):
     '''
@@ -41,6 +41,7 @@ class IVTContext:
         self.hotkeyListener = HotkeyListener()
         
         self.__allCards = load_cards()
+        self.__allWeapons = load_weapons()
 
 
     def getAllCards(self):

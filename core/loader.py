@@ -7,8 +7,10 @@ from .ivtproperty import WeaponProperty
 COMMON_CARD_JSON_PATH = 'data/cards.json'
 RIVEN_CARD_JSON_PATH = 'data/rivenS.json'
 EXCLUSIVE_CARD_JSON_PATH = 'data/exclusive.json'
+WEAPON_JSON_PATH = 'data/weapons.json'
 
 ALL_CARDS = None
+ALL_WEAPONS = None
 
 def load_cards():
     global ALL_CARDS
@@ -66,7 +68,6 @@ def _load_common_cards():
         )
         common_cards.append(card)
     return common_cards
-
 
 def _load_riven_cards():
     try:
@@ -131,3 +132,56 @@ def _load_exclusive_cards():
         )
         exclusive_cards.append(card)
     return exclusive_cards
+
+def load_weapons():
+    global ALL_WEAPONS
+    if ALL_WEAPONS is None:
+        ALL_WEAPONS = _load_weapon_data()
+    return ALL_WEAPONS
+
+def _load_weapon_data():
+    try:
+        with open(WEAPON_JSON_PATH, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"载入武器数据失败: {e}")
+        return []
+
+    from .ivtweapon import Weapon
+    from .ivtproperty import WeaponPropertySnapshot
+
+    weapons = []
+    for weaponData in data:
+        try:
+            weaponType = WeaponType.fromString(weaponData.get('weaponType', 'All'))
+        except KeyError as e:
+            weaponType = WeaponType.All
+        try:
+            subWeaponType = SubWeaponType.fromString(weaponData.get('subWeaponType', 'All'))
+        except KeyError as e:
+            subWeaponType = SubWeaponType.Null
+
+        name = weaponData['name']
+        basename = weaponData['basename']
+
+        # 解析属性
+        properties = []
+        for propData in weaponData.get('baseProperties', []):
+            try:
+                propertyType = WeaponPropertyType[propData['type']]
+                propertyValue = propData['value']
+                properties.append(WeaponProperty.createBaseProperty(propertyType, propertyValue))
+            except (KeyError, ValueError) as e:
+                print(f"警告: 在武器 '{name}' 中遇到未知的属性类型 '{propData.get('type')}'。已跳过。")
+                continue
+
+
+        weapon = Weapon(
+            name=name,
+            basename=basename,
+            weaponType=weaponType,
+            subWeaponType=subWeaponType,
+            snapshot=WeaponPropertySnapshot(properties, False)
+        )
+        weapons.append(weapon)
+    return weapons

@@ -1,6 +1,5 @@
 from .ivtenum import *
 from .ivtproperty import WeaponProperty
-from abc import ABC, abstractmethod
 import copy
 
 class WeaponCardBase:

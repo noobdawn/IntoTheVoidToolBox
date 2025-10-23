@@ -334,10 +334,10 @@ class WeaponPropertySnapshot:
             FinalDamageArray.append(weaponProperty)
 
         # 计算动能伤害
-        physicalAddon = self.__finalPropertyData.getAddon(WeaponPropertyType.PhysicalDamage)
+        physicalAddon = self.__finalPropertyData.getAddon(WeaponPropertyType.Physics)
         if physicalAddon != 0.0:
             finalPhysicalDamage = baseDamage * physicalAddon / 100.0
-            self.__finalPropertyData.setFinalValue(WeaponPropertyType.PhysicalDamage, finalPhysicalDamage)
+            self.__finalPropertyData.setFinalValue(WeaponPropertyType.Physics, finalPhysicalDamage)
 
         # 将最终的元素伤害加入快照
         for weaponProperty in FinalDamageArray:
@@ -357,4 +357,4 @@ class WeaponPropertySnapshot:
         '''
         更新属性快照（幽灵版，仅更新基础属性，不计算元素伤害复合）
         '''
-        self.__finalPropertyData = copy.deepcopy(self.__basePropertyData)
+        pass
