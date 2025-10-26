@@ -313,7 +313,7 @@ class SubWeaponType(Enum):
 	'''
 	在武器类型的基础上更细化的武器分类
 	'''
-	Null = 0
+	All = 0
 	AssaultRifle = 1 # 突击步枪
 	SniperRifle = 2 # 狙击枪
 	MachineGun = 3 # 机枪
@@ -338,7 +338,7 @@ class SubWeaponType(Enum):
 			raise ValueError(f"未知子武器类型字符串: {s}")
 
 SubWeaponTypeToString = {
-	SubWeaponType.Null: "所有子类型",
+	SubWeaponType.All: "所有子类型",
 	SubWeaponType.AssaultRifle: "突击步枪",
 	SubWeaponType.SniperRifle: "狙击枪",
 	SubWeaponType.MachineGun: "机枪",
@@ -352,7 +352,7 @@ SubWeaponTypeToString = {
 }
 
 StringToSubWeaponType = {
-	"All": SubWeaponType.Null,
+	"All": SubWeaponType.All,
 	"AssaultRifle": SubWeaponType.AssaultRifle,
 	"SniperRifle": SubWeaponType.SniperRifle,
 	"MachineGun": SubWeaponType.MachineGun,

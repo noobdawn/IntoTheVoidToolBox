@@ -2,9 +2,9 @@ import sys
 from PyQt5.QtWidgets import QApplication, QSplashScreen
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
-from core.ivtcontext import IVTContext
 
-QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
+
+# QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
 
 def main():
     app = QApplication(sys.argv)
@@ -14,9 +14,12 @@ def main():
     splash.showMessage("正在启动...", Qt.AlignBottom | Qt.AlignCenter, Qt.white)
     splash.show()
 
-    context = IVTContext()
+    from ui.main_window import MainWindow
+    main_window = MainWindow()
+    splash.finish(main_window)
+    main_window.show()
 
-    pass
+    sys.exit(app.exec())
 
 if __name__ == "__main__":
     main()

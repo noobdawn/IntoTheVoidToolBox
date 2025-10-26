@@ -5,7 +5,7 @@ from .ivtenum import WeaponPropertyType, WeaponType, SubWeaponType, CardSet, Slo
 from .ivtproperty import WeaponProperty
 
 COMMON_CARD_JSON_PATH = 'data/cards.json'
-RIVEN_CARD_JSON_PATH = 'data/rivenS.json'
+RIVEN_CARD_JSON_PATH = 'data/rivens.json'
 EXCLUSIVE_CARD_JSON_PATH = 'data/exclusive.json'
 WEAPON_JSON_PATH = 'data/weapons.json'
 
@@ -47,7 +47,7 @@ def _load_common_cards():
         try:
             subWeaponType = SubWeaponType.fromString(cardData.get('subWeapon', 'All'))
         except KeyError as e:
-            subWeaponType = SubWeaponType.Null
+            subWeaponType = SubWeaponType.All
 
         # 解析卡牌套装
         cardSetStr = cardData.get('cardSet')
@@ -64,7 +64,8 @@ def _load_common_cards():
             subWeaponType=subWeaponType,
             cardSet=cardSet,
             slot=slot,
-            cost=cardData.get('cost', 0)
+            cost=cardData.get('cost', 0),
+            isPrime=cardData.get('isPrime', False)
         )
         common_cards.append(card)
     return common_cards
@@ -159,14 +160,14 @@ def _load_weapon_data():
         try:
             subWeaponType = SubWeaponType.fromString(weaponData.get('subWeaponType', 'All'))
         except KeyError as e:
-            subWeaponType = SubWeaponType.Null
+            subWeaponType = SubWeaponType.All
 
         name = weaponData['name']
         basename = weaponData['basename']
 
         # 解析属性
         properties = []
-        for propData in weaponData.get('baseProperties', []):
+        for propData in weaponData.get('properties', []):
             try:
                 propertyType = WeaponPropertyType[propData['type']]
                 propertyValue = propData['value']
@@ -185,3 +186,71 @@ def _load_weapon_data():
         )
         weapons.append(weapon)
     return weapons
+
+def save_riven_card(card : WeaponCardRiven) -> bool:
+    cardData = {
+        'name': card.name,
+        'properties': [{'type': prop.propertyType.name, 'value': prop.addon} for prop in card.getPropertiesRef()],
+        'cost': card.cost,
+        'slot': card.slot.value,
+        'weaponName': card.weaponName
+    }
+
+    allRivenCards = []
+    # 1. 读取现有数据
+    if os.path.exists(RIVEN_CARD_JSON_PATH):
+        try:
+            with open(RIVEN_CARD_JSON_PATH, 'r', encoding='utf-8') as file:
+                content = file.read()
+                if content:
+                    allRivenCards = json.loads(content)
+                if not isinstance(allRivenCards, list):
+                    return False
+        except (json.JSONDecodeError, FileNotFoundError) as e:
+            print(f"读取现有紫卡数据失败: {e}")
+            return False
+    # 2. 添加新卡
+    allRivenCards.append(cardData)
+    # 3. 写回文件   
+    try:
+        with open(RIVEN_CARD_JSON_PATH, 'w', encoding='utf-8') as file:
+            json.dump(allRivenCards, file, ensure_ascii=False, indent=4)
+
+        # 4. 更新全局缓存
+        global ALL_CARDS
+        ALL_CARDS = allRivenCards
+        return True
+    except IOError as e:
+        print(f"保存紫卡数据失败: {e}")
+        return False
+    
+def delete_riven_card(card: WeaponCardRiven) -> bool:
+    '''
+    删除混淆执行卡
+    '''
+    allRivenCards = []
+    # 1. 读取现有数据
+    if os.path.exists(RIVEN_CARD_JSON_PATH):
+        try:
+            with open(RIVEN_CARD_JSON_PATH, 'r', encoding='utf-8') as file:
+                content = file.read()
+                if content:
+                    allRivenCards = json.loads(content)
+                if not isinstance(allRivenCards, list):
+                    return False
+        except (json.JSONDecodeError, FileNotFoundError) as e:
+            print(f"读取现有紫卡数据失败: {e}")
+            return False
+    # 2. 删除指定卡
+    allRivenCards = [cardData for cardData in allRivenCards if cardData.get('name') != card.name or cardData.get('weaponName') != card.weaponName]
+    # 3. 写回文件
+    try:
+        with open(RIVEN_CARD_JSON_PATH, 'w', encoding='utf-8') as file:
+            json.dump(allRivenCards, file, ensure_ascii=False, indent=4)
+        # 4. 更新全局缓存
+        global ALL_CARDS
+        ALL_CARDS = allRivenCards
+        return True
+    except IOError as e:
+        print(f"保存紫卡数据失败: {e}")
+        return False

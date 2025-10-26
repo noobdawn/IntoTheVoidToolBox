@@ -111,6 +111,13 @@ class WeaponProperty(PropertyData):
         '''
         return cls(propertyType, 0.0, addon, from_mod=True)
     
+    @classmethod
+    def createBaseProperty(cls, propertyType : WeaponPropertyType, value: float):
+        '''
+        创建一个仅有基础值的属性条目
+        '''
+        return cls(propertyType, value, 0.0, from_mod=False)
+    
     def __str__(self):
         addon = self.getAddon()
         if self.from_mod:

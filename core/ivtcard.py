@@ -46,7 +46,7 @@ class WeaponCardCommon(WeaponCardWithProperty):
     '''
     最常见的武器执行卡类型，普通武器执行卡
     '''
-    def __init__(self, name: str, properties : list[WeaponProperty], weaponType : WeaponType, subWeaponType : SubWeaponType, cardSet : CardSet, slot : Slot, cost : int):
+    def __init__(self, name: str, properties : list[WeaponProperty], weaponType : WeaponType, subWeaponType : SubWeaponType, cardSet : CardSet, slot : Slot, cost : int, isPrime : bool):
         self.name = name
         self.weaponType = weaponType
         self.subWeaponType = subWeaponType
@@ -54,6 +54,7 @@ class WeaponCardCommon(WeaponCardWithProperty):
         self.slot = slot
         self.cost = cost
         self.properties = properties
+        self.isPrime = isPrime
 
 
 class WeaponCardRiven(WeaponCardWithProperty, WeaponCardExclusive):

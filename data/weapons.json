@@ -2,7 +2,8 @@
     {
         "name": "私法 水滴",
         "basename": "水滴",
-        "type": "Rifle",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
         "isPrime": true,
         "properties": [
             {
@@ -50,7 +51,8 @@
     {
         "name": "私法 大角星",
         "basename": "大角星",
-        "type": "Rifle",
+        "weaponType": "Rifle",
+        "subWeaponType": "LaserGun",
         "isPrime": true,
         "properties": [
             {
@@ -98,7 +100,8 @@
     {
         "name": "聚焦矿灯",
         "basename": "聚焦矿灯",
-        "type": "Rifle",
+        "weaponType": "Rifle",
+        "subWeaponType": "LaserGun",
         "isPrime": false,
         "properties": [
             {
@@ -146,7 +149,8 @@
     {
         "name": "私法 冰封瀑",
         "basename": "冰封瀑",
-        "type": "Shotgun",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
         "isPrime": true,
         "properties": [
             {
@@ -190,7 +194,8 @@
     {
         "name" : "特斯拉感生步枪",
         "basename" : "特斯拉感生步枪",
-        "type" : "Rifle",
+        "weaponType" : "Rifle",
+        "subWeaponType" : "SniperRifle",
         "isPrime" : false,
         "properties" : [
             {
@@ -234,7 +239,8 @@
     {
         "name": "噪波",
         "basename": "噪波",
-        "type": "Pistol",
+        "weaponType": "Pistol",
+        "subWeaponType": "MicroSubmachineGun",
         "isPrime": false,
         "properties": [
             {
