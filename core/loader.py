@@ -28,6 +28,9 @@ def _load_common_cards():
 
     common_cards = []
     for cardData in data:
+        if cardData['name'] == "熔岩枪管":
+            print("调试点")
+
         # 解析属性
         properties = []
         for propData in cardData.get('properties', []):
@@ -36,7 +39,7 @@ def _load_common_cards():
                 propertyValue = propData['value']
                 properties.append(WeaponProperty.createModProperty(propertyType, propertyValue))
             except (KeyError, ValueError) as e:
-                print(f"警告: 在卡牌 '{cardData['name']}' 中遇到未知的属性类型 '{propertyTypeStr}'。已跳过。")
+                print(f"警告: 在卡牌 '{cardData['name']}' 中遇到未知的属性类型 '{propData.get('type')}'。已跳过。")
                 continue
 
         # 解析武器类型
@@ -182,7 +185,7 @@ def _load_weapon_data():
             basename=basename,
             weaponType=weaponType,
             subWeaponType=subWeaponType,
-            snapshot=WeaponPropertySnapshot(properties, False)
+            snapshot=WeaponPropertySnapshot(properties, [])
         )
         weapons.append(weapon)
     return weapons

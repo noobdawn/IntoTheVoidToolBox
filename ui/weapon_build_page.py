@@ -142,7 +142,7 @@ class WeaponPropertyCard(CardWidget):
         self._addPropertyLabel('面板总伤害', damage, tooltip='武器面板伤害，计入魈鬼系列卡牌的元素转化')
 
         for weaponPropType in WeaponPropertyType:
-            value = weapon.snapshot.getPropertyValue(weaponPropType)
+            value = request.finalSnapshot.getPropertyValue(weaponPropType)
             if value != 0:
                 self._addPropertyLabel(str(weaponPropType), value)
 
@@ -357,7 +357,7 @@ class CharacterSettingCard(FoldableCardWidget):
         spinBox = SpinBox()
         spinBox.setRange(1, 10)
 
-        removeButton = TransparentToolButton(FIF.DELETE, '', self)
+        removeButton = TransparentToolButton(FIF.DELETE, self)
 
         hLayout.addWidget(comboBox)
         hLayout.addWidget(spinBox)
@@ -365,10 +365,12 @@ class CharacterSettingCard(FoldableCardWidget):
         hLayout.addWidget(removeButton)
 
         self.cardSetListLayout.addLayout(hLayout)
-        widgetTubple = (hLayout, comboBox, spinBox, removeButton)
+        widgetTubple = (comboBox, spinBox, removeButton, hLayout)
         self.cardSetWidgets.append(widgetTubple)
 
         removeButton.clicked.connect(lambda: self._removeCardSetRow(widgetTubple))
+        comboBox.currentIndexChanged.connect(self._onCharacterSettingChanged)
+        spinBox.valueChanged.connect(self._onCharacterSettingChanged)
         
     def _removeCardSetRow(self, widgetTubple):
         '''
@@ -385,6 +387,7 @@ class CharacterSettingCard(FoldableCardWidget):
         self.cardSetListLayout.removeItem(hLayout)
         hLayout.deleteLater()
         self.cardSetWidgets.remove(widgetTubple)
+        self._onCharacterSettingChanged()
 
     def _onCharacterSettingChanged(self):
         '''
@@ -416,7 +419,7 @@ class CharacterSettingCard(FoldableCardWidget):
         获取当前选择的执行卡套装信息
         '''
         cardSetInfo = []
-        for _, comboBox, spinBox, _ in self.cardSetWidgets:
+        for comboBox, spinBox, removeButton, hLayou in self.cardSetWidgets:
             cardSet = comboBox.currentData()
             count = spinBox.value()
             cardSetInfo.append( (cardSet, count) )

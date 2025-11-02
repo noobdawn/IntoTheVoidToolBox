@@ -90,10 +90,15 @@ class WeaponProperty(PropertyData):
         return self._datas[self.propertyType.value][1]
 
     def __add__(self, other):
-        if self.propertyType != other.propertyType:
-            raise ValueError("无法将不同类型的属性相加")
-        if other.getValue() != 0.0 and self.getValue() != 0.0:
+        if other.getAddon() != 0.0 and self.getValue() != 0.0:
             raise ValueError("属性不能同时拥有基础值和加成")
+        if self.propertyType != other.propertyType:
+            if self.propertyType.isComposedElementDamage() and other.propertyType.isBaseElementDamage():
+                self._datas[self.propertyType.value][0] += other.getValue()
+                self._datas[self.propertyType.value][1] += other.getAddon()
+                return self                
+            else:
+                raise ValueError("无法将不同类型的属性相加")
         self._datas[self.propertyType.value][0] += other.getValue()
         self._datas[self.propertyType.value][1] += other.getAddon()
         return self
@@ -102,7 +107,30 @@ class WeaponProperty(PropertyData):
         '''
         切换属性类型
         '''
+        value = self.getValue()
+        addon = self.getAddon()
+        self.clear()
         self.propertyType = newPropertyType
+        self._datas[newPropertyType.value][0] = value
+        self._datas[newPropertyType.value][1] = addon
+
+    def convertToNotAirProperty(self):
+        '''
+        如果是空中属性，则转换为非空中属性
+        '''
+        if not self.propertyType.isAirProperty():
+            return
+        if self.propertyType == WeaponPropertyType.ColdInAir:
+            self.switchPropertyType(WeaponPropertyType.Cold)
+        elif self.propertyType == WeaponPropertyType.FireInAir:
+            self.switchPropertyType(WeaponPropertyType.Fire)
+        elif self.propertyType == WeaponPropertyType.ElectricInAir:
+            self.switchPropertyType(WeaponPropertyType.Electric)
+        elif self.propertyType == WeaponPropertyType.PoisonInAir:
+            self.switchPropertyType(WeaponPropertyType.Poison)
+        elif self.propertyType == WeaponPropertyType.CriticalChanceInAir:
+            self.switchPropertyType(WeaponPropertyType.CriticalChance)
+
     
     @classmethod
     def createModProperty(cls, propertyType : WeaponPropertyType, addon: float):
@@ -135,13 +163,12 @@ class WeaponPropertySnapshot:
     '''
     武器属性条目集合
     '''
-    def __init__(self, properties : list[WeaponProperty] = [], update_now=True):
+    def __init__(self, weaponProperties : list[WeaponProperty], cardProperties : list[WeaponProperty] = []):
         self.__basePropertyData = PropertyData()
-        for prop in properties:
+        for prop in weaponProperties:
             self.__basePropertyData += prop
         self.__finalPropertyData = None
-        if update_now:
-            self.update([])
+        self.update(cardProperties)
 
     def getBaseTotalDamageArray(self) -> np.ndarray:
         '''
@@ -161,7 +188,9 @@ class WeaponPropertySnapshot:
         '''
         获取指定类型的属性值
         '''
-        return self.__basePropertyData.get(propertyType)
+        if self.__finalPropertyData is None:
+            return self.__basePropertyData.getValue(propertyType)
+        return self.__finalPropertyData.get(propertyType)
         
     def update(self, propertyArray : list[WeaponProperty]):
         '''
@@ -183,10 +212,10 @@ class WeaponPropertySnapshot:
                 self.__finalPropertyData += weaponProperty
         # 将元素伤害类词条从百分比转化为实际的伤害数值
         for weaponProperty in variableElementDamageArray:
-            finalValue = weaponProperty.addon * baseDamage / 100.0
+            finalValue = weaponProperty.getAddon() * baseDamage / 100.0
             weaponProperty.setFinalValue(finalValue)
         for weaponProperty in constantElementDamageArray:
-            finalValue = weaponProperty.addon
+            finalValue = weaponProperty.getAddon()
             weaponProperty.setFinalValue(finalValue)
         # 将枪械本身的元素伤害属性添加到variableElementDamageArray末尾，然后清空快照中所有元素伤害属性
         for propertyTypeValue in range(10):
@@ -209,7 +238,7 @@ class WeaponPropertySnapshot:
         def _findElementDamage(propertyType: WeaponPropertyType) -> WeaponProperty | None:
             for weaponProperty in FinalDamageArray:
                 if weaponProperty.propertyType == propertyType:
-                    return True, property
+                    return True, weaponProperty
             return False, None
         
         def _findElementDamageComposed(propertyType: WeaponPropertyType):
@@ -260,78 +289,78 @@ class WeaponPropertySnapshot:
             if damageType == WeaponPropertyType.Fire:
                 find, property = _findElementDamage(WeaponPropertyType.Cold)
                 if find:
-                    currentValue = weaponProperty.getValue()
-                    weaponProperty.setFinalValue(currentValue + damageValue)
-                    weaponProperty.switchPropertyType(WeaponPropertyType.Cracking)
+                    currentValue = property.getValue()
+                    property.setFinalValue(currentValue + damageValue)
+                    property.switchPropertyType(WeaponPropertyType.Cracking)
                     continue
                 find, property = _findElementDamage(WeaponPropertyType.Electric)
                 if find:
-                    currentValue = weaponProperty.getValue()
-                    weaponProperty.setFinalValue(currentValue + damageValue)
-                    weaponProperty.switchPropertyType(WeaponPropertyType.Ether)
+                    currentValue = property.getValue()
+                    property.setFinalValue(currentValue + damageValue)
+                    property.switchPropertyType(WeaponPropertyType.Ether)
                     continue
                 find, property = _findElementDamage(WeaponPropertyType.Poison)
                 if find:
-                    currentValue = weaponProperty.getValue()
-                    weaponProperty.setFinalValue(currentValue + damageValue)
-                    weaponProperty.switchPropertyType(WeaponPropertyType.Gas)
+                    currentValue = property.getValue()
+                    property.setFinalValue(currentValue + damageValue)
+                    property.switchPropertyType(WeaponPropertyType.Gas)
                     continue
             elif damageType == WeaponPropertyType.Cold:
                 find, property = _findElementDamage(WeaponPropertyType.Fire)
                 if find:
-                    currentValue = weaponProperty.getValue()
-                    weaponProperty.setFinalValue(currentValue + damageValue)
-                    weaponProperty.switchPropertyType(WeaponPropertyType.Cracking)
+                    currentValue = property.getValue()
+                    property.setFinalValue(currentValue + damageValue)
+                    property.switchPropertyType(WeaponPropertyType.Cracking)
                     continue
                 find, property = _findElementDamage(WeaponPropertyType.Electric)
                 if find:
-                    currentValue = weaponProperty.getValue()
-                    weaponProperty.setFinalValue(currentValue + damageValue)
-                    weaponProperty.switchPropertyType(WeaponPropertyType.Magnetic)
+                    currentValue = property.getValue()
+                    property.setFinalValue(currentValue + damageValue)
+                    property.switchPropertyType(WeaponPropertyType.Magnetic)
                     continue
                 find, property = _findElementDamage(WeaponPropertyType.Poison)
                 if find:
-                    currentValue = weaponProperty.getValue()
-                    weaponProperty.setFinalValue(currentValue + damageValue)
-                    weaponProperty.switchPropertyType(WeaponPropertyType.Virus)
+                    currentValue = property.getValue()
+                    property.setFinalValue(currentValue + damageValue)
+                    property.switchPropertyType(WeaponPropertyType.Virus)
                     continue
             elif damageType == WeaponPropertyType.Electric:
                 find, property = _findElementDamage(WeaponPropertyType.Fire)
                 if find:
-                    currentValue = weaponProperty.getValue()
-                    weaponProperty.setFinalValue(currentValue + damageValue)
-                    weaponProperty.switchPropertyType(WeaponPropertyType.Ether)
+                    currentValue = property.getValue()
+                    property.setFinalValue(currentValue + damageValue)
+                    property.switchPropertyType(WeaponPropertyType.Ether)
                     continue
                 find, property = _findElementDamage(WeaponPropertyType.Cold)
                 if find:
-                    currentValue = weaponProperty.getValue()
-                    weaponProperty.setFinalValue(currentValue + damageValue)
-                    weaponProperty.switchPropertyType(WeaponPropertyType.Magnetic)
+                    currentValue = property.getValue()
+                    property.setFinalValue(currentValue + damageValue)
+                    property.switchPropertyType(WeaponPropertyType.Magnetic)
                     continue
                 find, property = _findElementDamage(WeaponPropertyType.Poison)
                 if find:
-                    currentValue = weaponProperty.getValue()
-                    weaponProperty.setFinalValue(currentValue + damageValue)
-                    weaponProperty.switchPropertyType(WeaponPropertyType.Radiation)
+                    currentValue = property.getValue()
+                    property.setFinalValue(currentValue + damageValue)
+                    property.switchPropertyType(WeaponPropertyType.Radiation)
                     continue
             elif damageType == WeaponPropertyType.Poison:
                 find, property = _findElementDamage(WeaponPropertyType.Fire)
                 if find:
-                    currentValue = weaponProperty.getValue()
-                    weaponProperty.setFinalValue(currentValue + damageValue)
-                    weaponProperty.switchPropertyType(WeaponPropertyType.Gas)
+                    currentValue = property.getValue()
+                    property.setFinalValue(currentValue + damageValue)
+                    property.switchPropertyType(WeaponPropertyType.Gas)
                     continue
                 find, property = _findElementDamage(WeaponPropertyType.Cold)
                 if find:
-                    currentValue = weaponProperty.getValue()
-                    weaponProperty.setFinalValue(currentValue + damageValue)
-                    weaponProperty.switchPropertyType(WeaponPropertyType.Virus)
+                    currentValue = property.getValue()
+                    property.setFinalValue(currentValue + damageValue)
+                    property.switchPropertyType(WeaponPropertyType.Virus)
                     continue
                 find, property = _findElementDamage(WeaponPropertyType.Electric)
                 if find:
-                    currentValue = weaponProperty.getValue()
-                    weaponProperty.setFinalValue(currentValue + damageValue)
-                    weaponProperty.switchPropertyType(WeaponPropertyType.Radiation)
+                    currentValue = property.getValue()
+                    property.setFinalValue(currentValue + damageValue)
+                    property.switchPropertyType(WeaponPropertyType.Radiation)
                     continue
             # 如果都没有，则作为新的元素伤害加入最终伤害数组
             FinalDamageArray.append(weaponProperty)
@@ -360,8 +389,16 @@ class WeaponPropertySnapshot:
                 self.__finalPropertyData.setFinalValue(propertyType, finalValue)
 
 
-    def update_ghost(self):
+    def applyGhostCardConversion(self, ghostCardCount: int):
         '''
-        更新属性快照（幽灵版，仅更新基础属性，不计算元素伤害复合）
+        应用鬼卡的动能转换效果
         '''
-        pass
+        totalDamage = self.getTotalDamageArray().sum()
+        physicalDamage = self.getTotalDamageArray()[WeaponPropertyType.Physics.value]
+        convertedPhysicalDamage = (totalDamage - physicalDamage) * ghostCardCount + physicalDamage
+        # 清空非动能伤害属性
+        for propertyTypeValue in range(10):
+            propertyType = WeaponPropertyType(propertyTypeValue)
+            self.__finalPropertyData.setFinalValue(propertyType, 0.0)
+        # 设置新的动能伤害属性
+        self.__finalPropertyData.setFinalValue(WeaponPropertyType.Physics, convertedPhysicalDamage)

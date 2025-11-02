@@ -123,6 +123,11 @@ class WeaponPropertyType(Enum):
 		# 元素伤害是指基础元素伤害和复合元素伤害
 		return self.value > 0 and self.value <= 10
 	
+	def isComposedElementDamage(self):
+		'''判断是否是复合元素伤害'''
+		# 复合元素伤害是指裂化、辐射、毒气、磁暴、以太、病毒
+		return self.value >= 5 and self.value <= 10
+	
 	def isDamage(self):
 		'''判断是否是伤害类型'''
 		# 伤害类型是指动能伤害和元素伤害

@@ -5,8 +5,10 @@ from .ivtweapon import *
 from .ivtdebuff import ElementDebuffState
 import numpy as np
 import math
+import random
 
-RNG = 0.0
+CRITICAL_RNG = 0.0
+TRIGGER_RNG = 0.0
 
 class MoveState:
     '''
@@ -187,7 +189,6 @@ def TriggerElementDebuff(damage : np.ndarray) -> DamageType:
     '''
     根据元素在伤害中的占比触发元素异常
     '''
-    global RNG
     dmg = damage.copy()
     # 动能伤害不参与异常触发
     dmg[WeaponPropertyType.Physics.value] = 0.0
@@ -195,7 +196,7 @@ def TriggerElementDebuff(damage : np.ndarray) -> DamageType:
     currentThreshold = 0.0
     for i in range(WeaponPropertyType.Cold.value, WeaponPropertyType.Virus.value + 1):
         currentThreshold += dmg[i] / totalElementDamage
-        if RNG < currentThreshold:
+        if random.random() < currentThreshold:
             return DamageType(i)
 
 class DPSRequest:
@@ -216,6 +217,7 @@ class DPSRequest:
         self.magazineDps = 0
         self.magazineDamage = 0
         self.averageDps = 0
+        self.finalSnapshot = None
 
     def calculate(self):
         '''
@@ -224,8 +226,14 @@ class DPSRequest:
         # 先获取执行卡的所有属性加成
         allPropertiesFromCards = []
         for card in self.cards:
-            if card is not None:
-                allPropertiesFromCards.extend(card.getPropertiesRef())
+            if card is not None and isinstance(card, WeaponCardWithProperty):
+                allPropertiesFromCards.extend(card.getProperties())
+        # 将空中才生效的属性视情况合并或剔除
+        if not self.moveState.isInAir:
+            allPropertiesFromCards = [prop for prop in allPropertiesFromCards if not prop.propertyType.isAirProperty()]
+        else:
+            for prop in allPropertiesFromCards:
+                prop.convertToNotAirProperty()
         # 再获取武器的所有基础属性
         allPropertiesFromWeapon = []
         baseSnapshot = self.weapon.getBaseSnapshot()
@@ -233,16 +241,24 @@ class DPSRequest:
             propValue = baseSnapshot.getPropertyValue(weaponProperty)
             if propValue != 0:
                 allPropertiesFromWeapon.append(WeaponProperty.createBaseProperty(weaponProperty, propValue))
-        # 合并所有属性
-        allProperties = allPropertiesFromWeapon + allPropertiesFromCards
         # 创建最终属性快照
-        finalSnapshot = WeaponPropertySnapshot(allProperties, True)
+        finalSnapshot = WeaponPropertySnapshot(weaponProperties=allPropertiesFromWeapon,
+                                               cardProperties=allPropertiesFromCards)
+        # 需要判断是否应该进行鬼卡的动能转换
+        ghostCardCount = self.cardSetInfo.getCardSetCount(CardSet.Ghost)
+        for card in self.cards:
+            if isinstance(card, WeaponCardCommon) and card.cardSet == CardSet.Ghost:
+                ghostCardCount += 1
+        if ghostCardCount > 0:
+            finalSnapshot.applyGhostCardConversion(ghostCardCount)
         # 获取面板伤害
         weaponDamage = finalSnapshot.getTotalDamageArray()
         self.damageOnGui = weaponDamage.sum()
         # 初始化随机数
-        global RNG
-        RNG = 0.0
+        global CRITICAL_RNG, TRIGGER_RNG
+        CRITICAL_RNG = 0.0
+        TRIGGER_RNG = 0.0
+        random.seed(114514)
         # 初始化造成的伤害
         damageTaken = 0.0
         # 计算实际发射的子弹数
@@ -289,6 +305,7 @@ class DPSRequest:
         self.magazineDps = damageTaken * attackSpeed / magazine
         reloadTime = finalSnapshot.getPropertyValue(WeaponPropertyType.ReloadTime)
         self.averageDps = self.magazineDamage / (magazine / attackSpeed + reloadTime)
+        self.finalSnapshot = finalSnapshot
 
     def _calculateDmageOnce(self, weaponDamage: np.ndarray, externalDamageMultiplier: float = 1.0, 
                             criticalChance: float = 0.0, criticalDamage: float = 0.0, triggerChance: float = 0.0,
@@ -331,36 +348,47 @@ class DPSRequest:
         )
         damageAfterReduction *= vulnerableVirusMultiplier
         # 计算是否暴击
-        global RNG
+        global CRITICAL_RNG
         if criticalFlag == 1:
             damageAfterReduction *= criticalMultiplier
         elif criticalFlag == -1:
             damageAfterReduction *= uncriticalMultiplier
         else:
-            RNG += criticalChance
-            if RNG >= 1.0:
+            CRITICAL_RNG += criticalChance
+            if CRITICAL_RNG >= 1.0:
                 damageAfterReduction *= criticalMultiplier
-                RNG = math.fmod(RNG * 7.3, 1.0)
+                CRITICAL_RNG = math.fmod(CRITICAL_RNG, 1.0)
             else:
                 damageAfterReduction *= uncriticalMultiplier
         # 计算外部伤害加成
         damageAfterReduction *= externalDamageMultiplier
         # 计算触发和持续伤害
         dotDamageTaken = 0.0
-        if triggerFlag == 1 or (triggerFlag == 0 and RNG + triggerChance >= 1.0):
-            RNG = math.fmod(RNG * 5.7, 1.0)
+        global TRIGGER_RNG
+        isTrigger = False
+        if triggerFlag == 1:
+            isTrigger = True
+        elif triggerFlag == -1:
+            isTrigger = False
+        else:
+            TRIGGER_RNG += triggerChance
+            if TRIGGER_RNG >= 1.0:
+                isTrigger = True
+                TRIGGER_RNG = math.fmod(TRIGGER_RNG, 1.0)
+        if isTrigger:
             debuffProperty = TriggerElementDebuff(weaponDamage)
-            self.targetInfo.elementDebuffState.addDebuffByDamageType(debuffProperty, 6)
-            # 如果是伤害类的Debuff，则其持续伤害总量计入到damageTaken中
-            DoTMultiplier = 0.0
-            if debuffProperty == DamageType.Fire or debuffProperty == DamageType.Electric or debuffProperty == DamageType.Gas:
-                # 热波、赛能、毒气元素异常的持续伤害倍率为 0.5，持续6秒
-                DoTMultiplier = 0.5
-            elif debuffProperty == DamageType.Cracking:
-                # 裂化的伤害倍率为 0.35，持续6秒
-                DoTMultiplier = 0.35
-            if DoTMultiplier > 0:
-                DoTDamage = weaponDamage.sum() * externalDamageMultiplier * DoTMultiplier
-                dotDamageTaken += DoTDamage * armorReduction * vulnerableVirusMultiplier
+            if debuffProperty is not None and debuffProperty != DamageType.Physics:
+                self.targetInfo.elementDebuffState.addDebuffByDamageType(debuffProperty, 6)
+                # 如果是伤害类的Debuff，则其持续伤害总量计入到damageTaken中
+                DoTMultiplier = 0.0
+                if debuffProperty == DamageType.Fire or debuffProperty == DamageType.Electric or debuffProperty == DamageType.Gas:
+                    # 热波、赛能、毒气元素异常的持续伤害倍率为 0.5，持续6秒
+                    DoTMultiplier = 0.5
+                elif debuffProperty == DamageType.Cracking:
+                    # 裂化的伤害倍率为 0.35，持续6秒
+                    DoTMultiplier = 0.35
+                if DoTMultiplier > 0:
+                    DoTDamage = weaponDamage.sum() * externalDamageMultiplier * DoTMultiplier
+                    dotDamageTaken += DoTDamage * armorReduction * vulnerableVirusMultiplier
         # 返回总伤害
         return damageAfterReduction + dotDamageTaken
