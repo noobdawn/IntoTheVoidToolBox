@@ -1,12 +1,12 @@
 import json
 import os
-from .ivtcard import WeaponCardCommon, WeaponCardRiven, WeaponCardExclusive
+from .ivtcard import WeaponCardCommon, WeaponCardRiven, WeaponCardSpecial
 from .ivtenum import WeaponPropertyType, WeaponType, SubWeaponType, CardSet, Slot
 from .ivtproperty import WeaponProperty
 
 COMMON_CARD_JSON_PATH = 'data/cards.json'
 RIVEN_CARD_JSON_PATH = 'data/rivens.json'
-EXCLUSIVE_CARD_JSON_PATH = 'data/exclusive.json'
+SPECIAL_CARD_JSON_PATH = 'data/specials.json'
 WEAPON_JSON_PATH = 'data/weapons.json'
 
 ALL_CARDS = None
@@ -15,7 +15,7 @@ ALL_WEAPONS = None
 def load_cards():
     global ALL_CARDS
     if ALL_CARDS is None:
-        ALL_CARDS = _load_common_cards() + _load_riven_cards() + _load_exclusive_cards()
+        ALL_CARDS = _load_common_cards() + _load_riven_cards() + _load_special_cards()
     return ALL_CARDS
 
 def _load_common_cards():
@@ -111,28 +111,28 @@ def _load_riven_cards():
         riven_cards.append(card)
     return riven_cards
 
-def _load_exclusive_cards():
+def _load_special_cards():
     try:
-        with open(EXCLUSIVE_CARD_JSON_PATH, 'r', encoding='utf-8') as file:
+        with open(SPECIAL_CARD_JSON_PATH, 'r', encoding='utf-8') as file:
             data = json.load(file)
     except (FileNotFoundError, json.JSONDecodeError) as e:
         print(f"载入专属执行卡失败: {e}")
         return []
 
-    exclusive_cards = []
+    special_cards = []
     for cardData in data:
         # 解析极性
         slotValue = cardData.get('slot', 0)
         slot = Slot(slotValue)
 
-        card = WeaponCardExclusive(
+        card = WeaponCardSpecial(
             name=cardData['name'],
             weaponName=cardData['weaponName'],
             slot=slot,
             cost=cardData.get('cost', 0)
         )
-        exclusive_cards.append(card)
-    return exclusive_cards
+        special_cards.append(card)
+    return special_cards
 
 def load_weapons():
     global ALL_WEAPONS

@@ -26,7 +26,7 @@ class ElementDebuffQueue:
         '''
         获取当前元素异常的数量，为常驻数量加上队列中数量
         '''
-        return min(len(self.queue) + self.constantCount, self.maxCount)
+        return min(len(self.queue) + self.constantCount, max(self.maxCount, 0))
 
     def addDebuff(self, debuff: ElementDebuff):
         '''
@@ -111,7 +111,7 @@ class ElementDebuffState:
         '''
         触发一次元素异常
         '''
-        if damageType == DamageType.Physical:
+        if damageType == DamageType.Physics:
             return
         debuff = ElementDebuff(duration)
         self.elementDebuff[damageType.value].addDebuff(debuff)
@@ -122,3 +122,16 @@ class ElementDebuffState:
         '''
         damageType = propertyType.toDamageType()
         self.addDebuffByDamageType(damageType, duration)
+
+    def getDebuffByPropertyType(self, propertyType: WeaponPropertyType) -> int:
+        '''
+        获取指定属性类型的元素异常队列
+        '''
+        damageType = propertyType.toDamageType()
+        return self.elementDebuff[damageType.value].getCount()
+    
+    def getDebuffByDamageType(self, damageType: DamageType):
+        '''
+        获取指定伤害类型的元素异常队列
+        '''
+        return self.elementDebuff[damageType.value].getCount()

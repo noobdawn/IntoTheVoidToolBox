@@ -17,8 +17,8 @@ class PropertyData:
         '''
         获取伤害属性数组
         '''
-        damage_array = np.zeros(10, dtype=np.float64)
-        for i in range(10):
+        damage_array = np.zeros(11, dtype=np.float64)
+        for i in range(11):
             damage_array[i] = self._datas[i][0] * (1 + self._datas[i][1] / 100)
         return damage_array
     
@@ -180,7 +180,7 @@ class WeaponPropertySnapshot:
                 else:
                     constantElementDamageArray.append(weaponProperty)
             else:
-                self.__basePropertyData += weaponProperty
+                self.__finalPropertyData += weaponProperty
         # 将元素伤害类词条从百分比转化为实际的伤害数值
         for weaponProperty in variableElementDamageArray:
             finalValue = weaponProperty.addon * baseDamage / 100.0
@@ -191,12 +191,12 @@ class WeaponPropertySnapshot:
         # 将枪械本身的元素伤害属性添加到variableElementDamageArray末尾，然后清空快照中所有元素伤害属性
         for propertyTypeValue in range(10):
             propertyType = WeaponPropertyType(propertyTypeValue)
-            if self.__basePropertyData.get(propertyType) != 0:
-                value = self.__basePropertyData.getValue(propertyType)
-                addon = self.__basePropertyData.getAddon(propertyType)
+            if self.__finalPropertyData.get(propertyType) != 0:
+                value = self.__finalPropertyData.getValue(propertyType)
+                addon = self.__finalPropertyData.getAddon(propertyType)
                 weaponBaseDamageProperty = WeaponProperty(propertyType, value, addon)
                 variableElementDamageArray.append(weaponBaseDamageProperty)
-                self.__basePropertyData.setFinalValue(propertyType, 0.0)
+                self.__finalPropertyData.setFinalValue(propertyType, 0.0)
         # 按照顺序开始复合元素伤害
         # 裂化 = 热波 + 冰冻
         # 辐射 = 赛能 + 创生

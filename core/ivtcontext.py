@@ -4,14 +4,18 @@ from .loader import load_cards, load_weapons, delete_riven_card
 
 from .ivtdps import DPSRequest
 from .ivtweapon import Weapon
-from .ivtcard import WeaponCardRiven
+from .ivtcard import WeaponCardRiven, WeaponCardBase
 
 class UISignals(QObject):
     '''
     全局UI使用的信号类
     '''
-    weaponChanged = pyqtSignal(DPSRequest)
+    weaponChanged = pyqtSignal(Weapon)
     deleteRivenCard = pyqtSignal(WeaponCardRiven)
+    miniCardSelected = pyqtSignal(WeaponCardBase)
+    cardSlotSelected = pyqtSignal(int)
+    weaponBuildRequestChanged = pyqtSignal()
+    dpsResultCompleted = pyqtSignal(DPSRequest)
 
 class HotkeyListener(QObject):
     '''
@@ -44,27 +48,27 @@ class IVTContext:
         self.uiSignals = UISignals()
         self.hotkeyListener = HotkeyListener()
         
-        self.__allCards = load_cards()
-        self.__allWeapons = load_weapons()
-
+        self._allCards = load_cards()
+        self._allWeapons = load_weapons()
+        self._lastDPSRequest: DPSRequest | None = None
 
     def getAllCards(self):
         '''
         获取所有执行卡
         '''
-        return self.__allCards
+        return self._allCards
     
     def getAllWeapons(self):
         '''
         获取所有武器
         '''
-        return self.__allWeapons
+        return self._allWeapons
     
     def getWeaponByName(self, name: str):
         '''
         根据名称获取武器
         '''
-        for weapon in self.__allWeapons:
+        for weapon in self._allWeapons:
             if weapon.name == name:
                 return weapon
         return None
@@ -74,7 +78,15 @@ class IVTContext:
         删除混淆执行卡
         '''
         delete_riven_card(card)
-        if card in self.__allCards['riven']:
-            self.__allCards['riven'].remove(card)
+        if card in self._allCards['riven']:
+            self._allCards['riven'].remove(card)
+
+    def triggerDpsCalculation(self, request: DPSRequest):
+        '''
+        触发DPS计算
+        '''
+        self._lastDPSRequest = request
+        request.calculate()
+        self.uiSignals.dpsResultCompleted.emit(request)
 
 CONTEXT = IVTContext()

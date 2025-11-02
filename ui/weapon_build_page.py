@@ -1,15 +1,18 @@
 from PyQt5.QtWidgets import (QFrame, QVBoxLayout, QHBoxLayout, QLabel, QWidget)
-from qfluentwidgets import SubtitleLabel, CardWidget, ComboBox, SpinBox, CheckBox, PushButton
+from qfluentwidgets import SubtitleLabel, CardWidget, ComboBox, SpinBox, CheckBox, PushButton, TransparentToolButton
 from qfluentwidgets import FluentIcon as FIF
 from PyQt5.QtCore import Qt
 
 from ui.components.autocompletion_combo_box import AutocompletionComboBox
 from ui.components.foldable_card_widget import FoldableCardWidget
 from ui.components.card_area import CardArea
+from ui.components.card_slot import CardSlot
 
 from core.ivtcontext import CONTEXT
-from core.ivtenum import (WeaponPropertyType, EnemyMaterial, DamageType, SkillDebuff)
+from core.ivtenum import (WeaponPropertyType, EnemyMaterial, DamageType, SkillDebuff, AvailableCardSets, CardSet, CharacterPropertyType)
 from core.ivtdps import DPSRequest
+from core.ivtweapon import Weapon
+from core.ivtcard import WeaponCardBase
 
 class WeaponSelectCard(CardWidget):
     '''
@@ -43,14 +46,24 @@ class WeaponSelectCard(CardWidget):
         '''
         weapon = CONTEXT.getWeaponByName(weaponName)
         if weapon:
-            request = DPSRequest(weapon, [])
-            CONTEXT.uiSignals.weaponChanged.emit(request)
+            CONTEXT.uiSignals.weaponChanged.emit(weapon)
+            request = DPSRequest(weapon, [None]*9)
+            CONTEXT.triggerDpsCalculation(request)
 
     def afterInit(self):
         '''
         当所有组件都初始化、注册完成后再调用此方法刷新
         '''
         self.onWeaponChanged(self.weaponSelectComboBox.currentText())
+
+
+    def getWeapon(self) -> Weapon:
+        '''
+        获取当前选择的武器
+        '''
+        weaponName = self.weaponSelectComboBox.currentText()
+        weapon = CONTEXT.getWeaponByName(weaponName)
+        return weapon
 
 class WeaponPropertyCard(CardWidget):
     '''
@@ -74,7 +87,7 @@ class WeaponPropertyCard(CardWidget):
         self.propertyLabels = {}
 
         signals = CONTEXT.uiSignals
-        signals.weaponChanged.connect(self._updateLabels)
+        signals.dpsResultCompleted.connect(self._updateLabels)
 
     def _addPropertyLabel(self, name: str, value, tooltip=None):
         '''
@@ -108,7 +121,7 @@ class WeaponPropertyCard(CardWidget):
 
     def _updateLabels(self, request: DPSRequest):
         '''
-        当武器变化或者属性变化时，更新所有属性标签
+        当属性变化时，更新所有属性标签
         '''
         # 清空现有标签
         for i in reversed(range(self.propertyLayout.count())):
@@ -119,11 +132,11 @@ class WeaponPropertyCard(CardWidget):
 
         weapon = request.weapon
 
-        self._addPropertyLabel('首发暴击伤害', 0, tooltip='若暴击率超过100%则为下一等级暴击伤害')
-        self._addPropertyLabel('首发非暴击伤害', 1, tooltip='若暴击率超过100%则为原等级暴击伤害')
-        self._addPropertyLabel('单次爆发伤害量', 0, tooltip='单个弹匣造成的总伤害')
-        self._addPropertyLabel('单次爆发DPS', 0, tooltip='单个弹匣造成的每秒伤害')
-        self._addPropertyLabel('平均DPS', 0, tooltip='计入换弹时间后的每秒伤害')
+        self._addPropertyLabel('首发暴击伤害', request.firstCriticalDamage, tooltip='若暴击率超过100%则为下一等级暴击伤害')
+        self._addPropertyLabel('首发非暴击伤害', request.firstUncriticalDamage, tooltip='若暴击率超过100%则为原等级暴击伤害')
+        self._addPropertyLabel('单次爆发伤害量', request.magazineDamage, tooltip='单个弹匣造成的总伤害')
+        self._addPropertyLabel('单次爆发DPS', request.magazineDps, tooltip='单个弹匣造成的每秒伤害')
+        self._addPropertyLabel('平均DPS', request.averageDps, tooltip='计入换弹时间后的每秒伤害')
 
         damage = weapon.snapshot.getTotalDamageArray().sum()
         self._addPropertyLabel('面板总伤害', damage, tooltip='武器面板伤害，计入魈鬼系列卡牌的元素转化')
@@ -155,7 +168,7 @@ class TargetSettingCard(FoldableCardWidget):
         self.materialLayout.addStretch(1)
         self.materialLayout.addWidget(self.materialComboBox)
         contentLayout.addLayout(self.materialLayout)
-        self.materialComboBox.currentIndexChanged.connect(self.onTargetSettingChanged)
+        self.materialComboBox.currentIndexChanged.connect(self._onTargetSettingChanged)
 
         # 护甲
         self.armorLayout = QHBoxLayout()
@@ -172,7 +185,7 @@ class TargetSettingCard(FoldableCardWidget):
         self.armorLayout.addWidget(self.armorInfoLabel)
         self.armorLayout.addWidget(self.armorSpinBox)
         contentLayout.addLayout(self.armorLayout)
-        self.armorSpinBox.valueChanged.connect(self.onTargetSettingChanged)
+        self.armorSpinBox.valueChanged.connect(self._onTargetSettingChanged)
 
         self.debuffLayout = QVBoxLayout()
         self.debuffLabel = QLabel("元素异常状态")
@@ -191,13 +204,13 @@ class TargetSettingCard(FoldableCardWidget):
             spinbox.setEnabled(False)
             checkbox.stateChanged.connect(lambda state, s=spinbox: s.setEnabled(state))
             checkbox.stateChanged.connect(lambda state, s=spinbox: s.setValue(0) if not state else None)
-            checkbox.stateChanged.connect(self.onTargetSettingChanged)
+            checkbox.stateChanged.connect(self._onTargetSettingChanged)
             layout.addWidget(checkbox)
             layout.addStretch(1)
             layout.addWidget(spinbox)
             self.debuffLayout.addLayout(layout)
             self.debuffWidgets[damageType] = (checkbox, spinbox)
-            spinbox.valueChanged.connect(self.onTargetSettingChanged)
+            spinbox.valueChanged.connect(self._onTargetSettingChanged)
 
         contentLayout.addWidget(self.debuffLabel)
         contentLayout.addLayout(self.debuffLayout)
@@ -212,27 +225,62 @@ class TargetSettingCard(FoldableCardWidget):
             checkbox = CheckBox(str(skillDebuff))
             self.skillDebuffLayout.addWidget(checkbox)
             self.skillDebuffWidgets[skillDebuff] = checkbox
-            checkbox.stateChanged.connect(self.onTargetSettingChanged)
+            checkbox.stateChanged.connect(self._onTargetSettingChanged)
 
         contentLayout.addLayout(self.skillDebuffLayout)
 
         self.applyButton = PushButton(FIF.SAVE,'应用', self)
-        self.applyButton.clicked.connect(self.onApplyClicked)
+        self.applyButton.clicked.connect(self._onApplyClicked)
 
         contentLayout.addWidget(self.applyButton, alignment=Qt.AlignRight)
 
-    def onApplyClicked(self):
+    def _onApplyClicked(self):
         '''
         应用当前设置到靶标信息中
         '''
         # 隐藏应用按钮
         self.applyButton.setVisible(False)
+        CONTEXT.uiSignals.weaponBuildRequestChanged.emit()
 
-    def onTargetSettingChanged(self):
+    def _onTargetSettingChanged(self):
         '''
         当靶标设置改变时调用此方法
         '''
         self.applyButton.setVisible(True)
+
+    def getElementDebuffInfo(self) -> list[tuple[DamageType, int]]:
+        '''
+        获取当前设置的元素异常状态信息
+        '''
+        elementDebuffInfo = []
+        for damageType, (checkbox, spinbox) in self.debuffWidgets.items():
+            if checkbox.isChecked():
+                value = spinbox.value()
+                elementDebuffInfo.append( (damageType, value) )
+        return elementDebuffInfo
+    
+    def getSkillDebuff(self) -> list[tuple[SkillDebuff, int]]:
+        '''
+        获取当前设置的技能异常状态信息
+        '''
+        skillDebuffInfo = []
+        for skillDebuff, checkbox in self.skillDebuffWidgets.items():
+            if checkbox.isChecked():
+                # 目前技能异常均为1
+                skillDebuffInfo.append( (skillDebuff, 1) )
+        return skillDebuffInfo
+    
+    def getMaterial(self) -> EnemyMaterial:
+        '''
+        获取当前选择的靶标材质
+        '''
+        return self.materialComboBox.currentData()
+    
+    def getArmor(self) -> float:
+        '''
+        获取当前设置的护甲值
+        '''
+        return self.armorSpinBox.value()
 
 class CharacterSettingCard(FoldableCardWidget):
     '''
@@ -254,7 +302,7 @@ class CharacterSettingCard(FoldableCardWidget):
         self.isMovingLayout.addStretch(1)
         self.isMovingLayout.addWidget(self.isMovingCheckBox)
         contentLayout.addLayout(self.isMovingLayout)
-        self.isMovingCheckBox.stateChanged.connect(self.onCharacterSettingChanged)
+        self.isMovingCheckBox.stateChanged.connect(self._onCharacterSettingChanged)
         self.isInAirLayout = QHBoxLayout()
         self.isInAirLabel = QLabel("空中")
         self.isInAirCheckBox = CheckBox()
@@ -262,7 +310,7 @@ class CharacterSettingCard(FoldableCardWidget):
         self.isInAirLayout.addStretch(1)
         self.isInAirLayout.addWidget(self.isInAirCheckBox)
         contentLayout.addLayout(self.isInAirLayout)
-        self.isInAirCheckBox.stateChanged.connect(self.onCharacterSettingChanged)
+        self.isInAirCheckBox.stateChanged.connect(self._onCharacterSettingChanged)
 
         contentLayout.addSpacing(10)
 
@@ -276,27 +324,161 @@ class CharacterSettingCard(FoldableCardWidget):
         self.skillStrengthLayout.addStretch(1)
         self.skillStrengthLayout.addWidget(self.skillStrengthSpinBox)
         contentLayout.addLayout(self.skillStrengthLayout)
-        self.skillStrengthSpinBox.valueChanged.connect(self.onCharacterSettingChanged)
+        self.skillStrengthSpinBox.valueChanged.connect(self._onCharacterSettingChanged)
 
+        # 执行卡套装设置
+        self.cardSetLayout = QVBoxLayout()
+        self.cardSetLabel = QLabel("执行卡套装")
+        self.cardSetLayout.addWidget(self.cardSetLabel)
+
+        self.cardSetWidgets = []
+        self.cardSetListLayout = QVBoxLayout()
+        self.addCardSetButton = PushButton(FIF.ADD, '添加执行卡套装', self)
+        self.addCardSetButton.clicked.connect(self._addCardSetRow)
+
+        self.cardSetLayout.addLayout(self.cardSetListLayout)
+        self.cardSetLayout.addWidget(self.addCardSetButton)
+        contentLayout.addLayout(self.cardSetLayout)
+
+        # 应用按钮
         self.applyButton = PushButton(FIF.SAVE,'应用', self)
-        self.applyButton.clicked.connect(self.onApplyClicked)
+        self.applyButton.clicked.connect(self._onApplyClicked)
         contentLayout.addWidget(self.applyButton, alignment=Qt.AlignRight)
 
+    def _addCardSetRow(self):
+        '''
+        添加一行执行卡套装设置
+        '''
+        hLayout = QHBoxLayout()
+        comboBox = ComboBox()
+        for cs in AvailableCardSets:
+            comboBox.addItem(str(cs), userData=cs)
 
+        spinBox = SpinBox()
+        spinBox.setRange(1, 10)
 
-    def onCharacterSettingChanged(self):
+        removeButton = TransparentToolButton(FIF.DELETE, '', self)
+
+        hLayout.addWidget(comboBox)
+        hLayout.addWidget(spinBox)
+        hLayout.addStretch(1)
+        hLayout.addWidget(removeButton)
+
+        self.cardSetListLayout.addLayout(hLayout)
+        widgetTubple = (hLayout, comboBox, spinBox, removeButton)
+        self.cardSetWidgets.append(widgetTubple)
+
+        removeButton.clicked.connect(lambda: self._removeCardSetRow(widgetTubple))
+        
+    def _removeCardSetRow(self, widgetTubple):
+        '''
+        删除一行执行卡套装设置
+        '''
+        comboBox, spinBox, removeButton, hLayout = widgetTubple
+        # 从布局中移除
+        while hLayout.count():
+            item = hLayout.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
+
+        self.cardSetListLayout.removeItem(hLayout)
+        hLayout.deleteLater()
+        self.cardSetWidgets.remove(widgetTubple)
+
+    def _onCharacterSettingChanged(self):
         '''
         当角色设置改变时调用此方法
         '''
         self.applyButton.setVisible(True)
-        pass
 
-    def onApplyClicked(self):
+    def _onApplyClicked(self):
         '''
         应用当前设置到角色信息中
         '''
         self.applyButton.setVisible(False)
-        pass
+        CONTEXT.uiSignals.weaponBuildRequestChanged.emit()
+
+    def getIsMoving(self) -> bool:
+        '''
+        获取角色是否移动
+        '''
+        return self.isMovingCheckBox.isChecked()
+    
+    def getIsInAir(self) -> bool:
+        '''
+        获取角色是否在空中
+        '''
+        return self.isInAirCheckBox.isChecked()
+    
+    def getCardSet(self) -> list[tuple[CardSet, int]]:
+        '''
+        获取当前选择的执行卡套装信息
+        '''
+        cardSetInfo = []
+        for _, comboBox, spinBox, _ in self.cardSetWidgets:
+            cardSet = comboBox.currentData()
+            count = spinBox.value()
+            cardSetInfo.append( (cardSet, count) )
+        return cardSetInfo
+    
+    def getSkillStrength(self) -> float:
+        '''
+        获取当前设置的技能强度
+        '''
+        return self.skillStrengthSpinBox.value()
+    
+class CardSlotCard(CardWidget):
+    '''
+    显示9个卡槽信息的组件
+    '''
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setObjectName('cardSlotCard')
+        
+        self.gridLayout = QHBoxLayout(self)
+        self.gridLayout.setSpacing(10)
+
+        self.cardSlots = []
+        for i in range(9):
+            cardSlot = CardSlot(i, i==8, self)
+            self.gridLayout.addWidget(cardSlot)
+            self.cardSlots.append(cardSlot)
+
+        CONTEXT.uiSignals.cardSlotSelected.connect(self._onCardSlotSelected)
+        CONTEXT.uiSignals.miniCardSelected.connect(self._onCardSelected)
+
+    def _onCardSlotSelected(self, slotIndex: int):
+        '''
+        当卡槽被选中时调用此方法
+        '''
+        for i in range(9):
+            self.cardSlots[i].setSelected(i == slotIndex)
+
+    def _onCardSelected(self, card):
+        '''
+        当执行卡被选中时调用此方法
+        '''
+        selectedIndex = -1
+        for i in range(9):
+            if self.cardSlots[i].isSelected:
+                selectedIndex = i
+                break
+        if selectedIndex != -1:
+            self.cardSlots[selectedIndex].setCard(card)
+            self.cardSlots[selectedIndex].setSelected(False)
+            # 执行卡发生变化，触发DPS计算
+            CONTEXT.uiSignals.weaponBuildRequestChanged.emit()
+
+    def getCards(self) -> list[WeaponCardBase]:
+        '''
+        获取当前卡槽中的所有执行卡
+        '''
+        cards = []
+        for cardSlot in self.cardSlots:
+            # 要不要处理专属卡，暂不确定
+            cards.append(cardSlot.card)
+        return cards
 
 class WeaponBuildPage(QFrame):
     def __init__(self, parent=None):
@@ -330,6 +512,10 @@ class WeaponBuildPage(QFrame):
         self.characterSettingCard = CharacterSettingCard(self)
         self.leftTopLayout.addWidget(self.characterSettingCard)
 
+        # 卡槽显示卡片
+        self.cardSlotCard = CardSlotCard(self)
+        self.leftTopLayout.addWidget(self.cardSlotCard)
+
         self.topLayout.addLayout(self.leftTopLayout)
         
         # 武器属性卡片
@@ -342,3 +528,41 @@ class WeaponBuildPage(QFrame):
         self.mainLayout.addWidget(self.cardSelectArea)
 
         self.weaponSelectCard.afterInit()
+
+        CONTEXT.uiSignals.weaponBuildRequestChanged.connect(self._onWeaponBuildRequestChanged)
+
+
+    def _onWeaponBuildRequestChanged(self):
+        '''
+        当配卡请求发生变化时调用此方法，主要是构建并填充DPSRequest，然后发起计算
+        '''
+        weapon = self.weaponSelectCard.getWeapon()
+        cards = self.cardSlotCard.getCards()
+        dpsRequest = DPSRequest(weapon, cards)
+        # 移动状态
+        dpsRequest.moveState.isMoving = self.characterSettingCard.getIsMoving()
+        dpsRequest.moveState.isInAir = self.characterSettingCard.getIsInAir()
+        # 执行卡套装
+        cardSets = self.characterSettingCard.getCardSet()
+        for cardSet, count in cardSets:
+            dpsRequest.cardSetInfo.setCardSetCount(cardSet, count)
+        # 技能强度
+        skillStrength = self.characterSettingCard.getSkillStrength()
+        dpsRequest.characterInfo.setCharacterProperty(CharacterPropertyType.SkillStrength, skillStrength)
+        # 靶标信息
+        targetMaterial = self.targetSettingCard.getMaterial()
+        armor = self.targetSettingCard.getArmor()
+        dpsRequest.targetInfo.material = targetMaterial
+        dpsRequest.targetInfo.armor = armor
+        # 元素异常状态
+        elementDeuffInfo = self.targetSettingCard.getElementDebuffInfo()
+        for damageType, value in elementDeuffInfo:
+            dpsRequest.targetInfo.addConstantElementDebuff(damageType, value)
+        # 技能异常
+        skillDebuffInfo = self.targetSettingCard.getSkillDebuff()
+        for skillDebuff, value in skillDebuffInfo:
+            dpsRequest.targetInfo.addSkillDebuff(skillDebuff, value)
+        # 通知计算完成
+        CONTEXT.triggerDpsCalculation(dpsRequest)
+
+

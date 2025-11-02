@@ -67,3 +67,10 @@ class WeaponCardRiven(WeaponCardWithProperty, WeaponCardExclusive):
         self.slot = slot
         self.cost = cost
         self.properties = properties
+
+class WeaponCardSpecial(WeaponCardExclusive):
+    '''
+    武器专属执行卡
+    '''
+    def __init__(self, name: str, weaponName : str, slot : Slot, cost : int):
+        super().__init__(name, weaponName, slot, cost)

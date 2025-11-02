@@ -2,31 +2,17 @@ from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QMenu, QM
 from PyQt5.QtGui import QPixmap, QPainter, QFont, QColor
 from PyQt5.QtCore import Qt, pyqtSignal
 
-from core.ivtcard import WeaponCardBase, WeaponCardCommon, WeaponCardRiven, WeaponCardExclusive, WeaponCardWithProperty
+from .cost_panel import CostPanel
+
+from core.ivtcard import WeaponCardBase, WeaponCardCommon, WeaponCardRiven, WeaponCardWithProperty, WeaponCardSpecial
 from core.ivtenum import Slot, SlotToString
 from core.ivtcontext import CONTEXT
-
-class CostPanel(QWidget):
-    """
-    显示执行卡电量
-    """
-    def __init__(self, pixmap_path, parent=None):
-        super().__init__(parent)
-        self.pixmap = QPixmap(pixmap_path)
-        self.setFixedSize(66, 25)
-
-    def paintEvent(self, event):
-        painter = QPainter(self)
-        if not self.pixmap.isNull():
-            painter.drawPixmap(self.rect(), self.pixmap)
-        super().paintEvent(event)
 
 class MiniCard(QWidget):
     '''
     显示执行卡的组件
     '''
-
-    def __init__(self, card: WeaponCardBase = None, parent=None):
+    def __init__(self, card: WeaponCardBase, parent=None):
         super().__init__(parent)
         self.setFixedSize(124, 128)
         
@@ -64,34 +50,47 @@ class MiniCard(QWidget):
         设置显示的执行卡
         '''
         self.card = card
-        if isinstance(card, WeaponCardCommon):
-            commonCard: WeaponCardCommon = card
-            self.backgroundPath = 'assets/ui/frame_gold.png'
-            if commonCard.isPrime:
-                self.backgroundPath = 'assets/ui/frame_prime.png'
-        elif isinstance(card, WeaponCardRiven):
-            self.backgroundPath = 'assets/ui/frame_riven.png'
+        if card is not None:
+            if isinstance(card, WeaponCardCommon):
+                commonCard: WeaponCardCommon = card
+                self.backgroundPath = 'assets/ui/frame_gold.png'
+                if commonCard.isPrime:
+                    self.backgroundPath = 'assets/ui/frame_prime.png'
+            elif isinstance(card, WeaponCardRiven):
+                self.backgroundPath = 'assets/ui/frame_riven.png'
+            else:
+                self.backgroundPath = 'assets/ui/frame_gold.png'
+            self.backgroundPixmap = QPixmap(self.backgroundPath)
+
+            self.costLabel.setText(str(card.cost) if card else "0")
+            slotPixmapPath = f'assets/ui/{SlotToString[self.card.slot.value]}.png'
+            slotPixmap = QPixmap(slotPixmapPath)
+            self.slotLabel.setPixmap(slotPixmap)
+            slotPixmapSize = self.slotLabel.size()
+            self.slotLabel.setFixedHeight(20)
+            self.slotLabel.setFixedWidth(20 * slotPixmap.width() // slotPixmap.height())
+
+            self.nameLabel.setText(card.name)
+            tooltipText = None
+            if isinstance(card, WeaponCardSpecial):
+                tooltipText = f'专属执行卡: 仅限武器 "{card.weaponName}" 使用'
+            elif isinstance(card, WeaponCardWithProperty):
+                propText = [str(prop) for prop in card.getPropertiesRef()]
+                tooltipText = f'属性执行卡:\n' + '\n'.join(propText)
+            if tooltipText:
+                self.setToolTip(tooltipText)
+
+            self.costPanel.show()
+            self.slotLabel.show()
+            self.nameLabel.show()
         else:
-            self.backgroundPath = 'assets/ui/frame_gold.png'
-        self.backgroundPixmap = QPixmap(self.backgroundPath)
-
-        self.costLabel.setText(str(card.cost) if card else "0")
-        slotPixmapPath = f'assets/ui/{SlotToString[self.card.slot.value]}.png'
-        slotPixmap = QPixmap(slotPixmapPath)
-        self.slotLabel.setPixmap(slotPixmap)
-        slotPixmapSize = self.slotLabel.size()
-        self.slotLabel.setFixedHeight(20)
-        self.slotLabel.setFixedWidth(20 * slotPixmap.width() // slotPixmap.height())
-
-        self.nameLabel.setText(card.name)
-        tooltipText = None
-        if isinstance(card, WeaponCardExclusive):
-            tooltipText = f'专属执行卡: 仅限武器 "{card.weaponName}" 使用'
-        elif isinstance(card, WeaponCardWithProperty):
-            propText = [str(prop) for prop in card.getPropertiesRef()]
-            tooltipText = f'属性执行卡:\n' + '\n'.join(propText)
-        if tooltipText:
-            self.setToolTip(tooltipText)
+            # 无执行卡时显示空白
+            self.backgroundPixmap = QPixmap()
+            self.costPanel.hide()
+            self.slotLabel.hide()
+            self.nameLabel.hide()
+            self.setToolTip("")
+        self.update()
 
     def setActive(self, active: bool):
         '''
@@ -99,11 +98,13 @@ class MiniCard(QWidget):
         '''
         self.isActive = active
         if active:
-            self.backgroundPixmap = QPixmap(self.backgroundPath)
+            if self.card is not None:  
+                self.backgroundPixmap = QPixmap(self.backgroundPath)
             self.nameLabel.setStyleSheet("color: white; background-color: transparent;")
             self.costLabel.setStyleSheet("color: white; background-color: transparent;")
         else:
-            self.backgroundPixmap = QPixmap(self.backgroundPath.replace('.png', '_gray.png'))
+            if self.card is not None:
+                self.backgroundPixmap = QPixmap(self.backgroundPath.replace('.png', '_gray.png'))
             self.nameLabel.setStyleSheet("color: gray; background-color: transparent;")
             self.costLabel.setStyleSheet("color: gray; background-color: transparent;")
         self.update()
@@ -112,13 +113,10 @@ class MiniCard(QWidget):
         """
         需自定义背景，故重写paintEvent
         """
-        painter = QPainter(self)
-        painter.begin(self)
-        try:
+        if not self.backgroundPixmap.isNull():
+            painter = QPainter(self)
             painter.setRenderHint(QPainter.Antialiasing)
-            if not self.backgroundPixmap.isNull():
-                painter.drawPixmap(self.rect(), self.backgroundPixmap)
-        finally:
+            painter.drawPixmap(self.rect(), self.backgroundPixmap)
             painter.end()
         super().paintEvent(event)
 
@@ -126,13 +124,14 @@ class MiniCard(QWidget):
         '''
         删除混淆执行卡
         '''
-        if isinstance(self.card, WeaponCardRiven):
-            menu = QMenu(self)
-            deleteAction = menu.addAction("删除")
-            action = menu.exec_(self.mapToGlobal(event.pos()))
+        if self.card is not None:
+            if isinstance(self.card, WeaponCardRiven):
+                menu = QMenu(self)
+                deleteAction = menu.addAction("删除")
+                action = menu.exec_(self.mapToGlobal(event.pos()))
 
-            if action == deleteAction:
-                self._handleDeleteRivenCard()
+                if action == deleteAction:
+                    self._handleDeleteRivenCard()
 
     def _handleDeleteRivenCard(self):
         '''
@@ -142,6 +141,5 @@ class MiniCard(QWidget):
                                      f'你确定要删除这张自定义紫卡 "{self.card.name}" 吗?',
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if reply == QMessageBox.Yes:
-            signal = CONTEXT.uiSignals.deleteRivenCard
             CONTEXT.deleteRivenCard(self.card)
-            signal.emit(self.card)
+            CONTEXT.uiSignals.deleteRivenCard.emit(self.card)
