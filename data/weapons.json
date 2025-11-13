@@ -1,7 +1,1673 @@
 [
     {
-        "name": "私法 水滴",
+        "name": "燃气巨炮",
+        "basename": "燃气巨炮",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 10.0
+            },
+            {
+                "type": "Fire",
+                "value": 5.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 15.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 180.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 11.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 9.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 1.6
+            },
+            {
+                "type": "Headshot",
+                "value": 40.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 13.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.9
+            }
+        ]
+    },
+    {
+        "name": "拳击手",
+        "basename": "拳击手",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 15.0
+            },
+            {
+                "type": "Electric",
+                "value": 12.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 190.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 13.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 11.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 1.6
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 2.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "强袭巨炮",
+        "basename": "强袭巨炮",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 10.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 12.0
+            },
+            {
+                "type": "Headshot",
+                "value": 40.0
+            },
+            {
+                "type": "Ether",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 20.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 150.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 9.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 1.2
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 10.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            },
+            {
+                "type": "PenetrationRate",
+                "value": 39.0
+            },
+            {
+                "type": "PenetrationValue",
+                "value": 30.0
+            }
+        ]
+    },
+    {
+        "name": "疾驰劲影",
+        "basename": "疾驰劲影",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Electric",
+                "value": 22.0
+            },
+            {
+                "type": "Cracking",
+                "value": 30.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 21.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 200.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 12.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 5.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 1.2
+            },
+            {
+                "type": "Headshot",
+                "value": 40.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 9.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.0
+            },
+            {
+                "type": "PenetrationRate",
+                "value": 39.0
+            },
+            {
+                "type": "PenetrationValue",
+                "value": 30.0
+            }
+        ]
+    },
+    {
+        "name": "格斗家",
+        "basename": "格斗家",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 10.0
+            },
+            {
+                "type": "Cold",
+                "value": 8.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 180.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 11.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 12.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 1.7
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 2.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "搏击手",
+        "basename": "搏击手",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "CriticalChance",
+                "value": 12.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 180.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 11.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 12.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 1.6
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "Radiation",
+                "value": 20.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 2.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "钢尾",
+        "basename": "钢尾",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 15.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 160.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 9.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 12.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 1.3
+            },
+            {
+                "type": "Headshot",
+                "value": 25.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 12.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.6
+            }
+        ]
+    },
+    {
+        "name": "私法 强袭巨炮",
+        "basename": "强袭巨炮",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 15.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 20.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 210.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 12.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 9.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 1.2
+            },
+            {
+                "type": "Headshot",
+                "value": 60.0
+            },
+            {
+                "type": "Ether",
+                "value": 18.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 10.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            },
+            {
+                "type": "PenetrationRate",
+                "value": 39.0
+            },
+            {
+                "type": "PenetrationValue",
+                "value": 30.0
+            }
+        ]
+    },
+    {
+        "name": "私法 格斗家",
+        "basename": "格斗家",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 10.0
+            },
+            {
+                "type": "Cold",
+                "value": 11.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 20.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 190.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 10.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 10.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 1.5
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 2.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "渴饮巨炮",
+        "basename": "渴饮巨炮",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 10.0
+            },
+            {
+                "type": "Poison",
+                "value": 6.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 160.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 9.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 12.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 1.6
+            },
+            {
+                "type": "Headshot",
+                "value": 20.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 8.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.9
+            }
+        ]
+    },
+    {
+        "name": "冰封瀑",
+        "basename": "冰封瀑",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Cold",
+                "value": 15.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 24.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 160.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 7.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 8.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 3.3
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 15.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.2
+            },
+            {
+                "type": "PenetrationRate",
+                "value": 39.0
+            },
+            {
+                "type": "PenetrationValue",
+                "value": 30.0
+            }
+        ]
+    },
+    {
+        "name": "狂噬之灾",
+        "basename": "狂噬之灾",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Fire",
+                "value": 36.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 19.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 170.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 11.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 5.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 2.4
+            },
+            {
+                "type": "Headshot",
+                "value": 40.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            },
+            {
+                "type": "MagazineSize",
+                "value": 7.0
+            }
+        ]
+    },
+    {
+        "name": "私法 燃气巨炮",
+        "basename": "燃气巨炮",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 20.0
+            },
+            {
+                "type": "Fire",
+                "value": 20.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 159.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 275.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 11.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 9.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 1.6
+            },
+            {
+                "type": "Headshot",
+                "value": 40.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 13.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.9
+            }
+        ]
+    },
+    {
+        "name": "私法 拳击手",
+        "basename": "拳击手",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 20.0
+            },
+            {
+                "type": "Electric",
+                "value": 13.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 20.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 190.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 13.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 11.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 1.6
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 2.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "转译 渴饮巨炮",
+        "basename": "渴饮巨炮",
+        "weaponType": "Shotgun",
+        "subWeaponType": "Shotgun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 5.0
+            },
+            {
+                "type": "Poison",
+                "value": 18.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 20.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 180.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 12.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 12.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 1.6
+            },
+            {
+                "type": "Headshot",
+                "value": 20.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 8.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "苍白夜莺",
+        "basename": "苍白夜莺",
+        "weaponType": "Rifle",
+        "subWeaponType": "SniperRifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 50.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 18.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 180.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 30.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 3.3
+            },
+            {
+                "type": "Cracking",
+                "value": 58.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 10.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.5
+            }
+        ]
+    },
+    {
+        "name": "特斯拉感生步枪",
+        "basename": "特斯拉感生步枪",
+        "weaponType": "Rifle",
+        "subWeaponType": "SniperRifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Magnetic",
+                "value": 522.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 17.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 190.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 30.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 0.8
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 8.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.5
+            }
+        ]
+    },
+    {
+        "name": "巴斯德疫变步枪",
+        "basename": "巴斯德疫变步枪",
+        "weaponType": "Rifle",
+        "subWeaponType": "SniperRifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 40.0
+            },
+            {
+                "type": "Cracking",
+                "value": 40.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 17.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 190.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 30.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 5.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 20.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.0
+            }
+        ]
+    },
+    {
+        "name": "星芒咏叹",
+        "basename": "星芒咏叹",
+        "weaponType": "Rifle",
+        "subWeaponType": "SniperRifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 48.0
+            },
+            {
+                "type": "Cracking",
+                "value": 40.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 20.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 250.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 10.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 3.5
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 15.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "反骨",
+        "basename": "反骨",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 18.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 15.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 190.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 19.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 9.4
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 30.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.65
+            }
+        ]
+    },
+    {
+        "name": "三段步枪",
+        "basename": "三段步枪",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 15.0
+            },
+            {
+                "type": "Electric",
+                "value": 15.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 21.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 160.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 6.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 2.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 33.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.8
+            }
+        ]
+    },
+    {
+        "name": "粗糙步枪",
+        "basename": "粗糙步枪",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 5.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 159.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 190.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 14.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 9.5
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "Radiation",
+                "value": 5.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.8
+            }
+        ]
+    },
+    {
+        "name": "四段步枪",
+        "basename": "四段步枪",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 10.0
+            },
+            {
+                "type": "Cracking",
+                "value": 9.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 13.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 190.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 4.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 1.8
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 36.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            },
+            {
+                "type": "PenetrationValue",
+                "value": 50.0
+            }
+        ]
+    },
+    {
+        "name": "隐忍长枪",
+        "basename": "隐忍长枪",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 22.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 17.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 200.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 16.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 9.3
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 30.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.8
+            }
+        ]
+    },
+    {
+        "name": "冷峻长枪",
+        "basename": "冷峻长枪",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Cold",
+                "value": 22.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 200.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 17.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 8.8
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 30.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.8
+            }
+        ]
+    },
+    {
+        "name": "轻装反骨",
+        "basename": "轻装反骨",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 10.0
+            },
+            {
+                "type": "Poison",
+                "value": 6.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 14.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 180.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 8.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 9.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 35.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.68
+            },
+            {
+                "type": "PenetrationValue",
+                "value": 80.0
+            }
+        ]
+    },
+    {
+        "name": "跃进反骨",
+        "basename": "跃进反骨",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 18.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 18.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 150.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 19.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 8.6
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 30.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.65
+            }
+        ]
+    },
+    {
+        "name": "私法三段步枪",
+        "basename": "私法三段步枪",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 19.0
+            },
+            {
+                "type": "Electric",
+                "value": 19.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 19.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 220.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 9.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 2.1
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 33.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.8
+            }
+        ]
+    },
+    {
+        "name": "私法 三段步枪",
+        "basename": "三段步枪",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "AttackSpeed",
+                "value": 2.1
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 33.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.8
+            }
+        ]
+    },
+    {
+        "name": "私法粗糙步枪",
+        "basename": "私法粗糙步枪",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 8.0
+            },
+            {
+                "type": "Radiation",
+                "value": 8.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 18.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 210.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 14.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 9.6
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.8
+            }
+        ]
+    },
+    {
+        "name": "水滴",
         "basename": "水滴",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Ether",
+                "value": 28.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 18.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 210.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 18.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 7.3
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 32.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.7
+            }
+        ]
+    },
+    {
+        "name": "融野",
+        "basename": "融野",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Poison",
+                "value": 28.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 19.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 170.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 10.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 8.4
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 30.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.0
+            }
+        ]
+    },
+    {
+        "name": "掠夺",
+        "basename": "掠夺",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 210.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 10.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 9.4
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 35.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.0
+            }
+        ]
+    },
+    {
+        "name": "私法隐忍长枪",
+        "basename": "私法隐忍长枪",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 29.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 17.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 260.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 16.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 10.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 30.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.8
+            }
+        ]
+    },
+    {
+        "name": "私法水滴",
+        "basename": "私法水滴",
         "weaponType": "Rifle",
         "subWeaponType": "AssaultRifle",
         "isPrime": true,
@@ -19,12 +1685,12 @@
                 "value": 170.0
             },
             {
-                "type": "MultiStrike",
-                "value": 1.0
-            },
-            {
                 "type": "TriggerChance",
                 "value": 17.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
             },
             {
                 "type": "AttackSpeed",
@@ -36,101 +1702,44 @@
             },
             {
                 "type": "MagazineSize",
-                "value": 32
+                "value": 32.0
             },
             {
                 "type": "ReloadTime",
                 "value": 1.7
-            },
-            {
-                "type": "PenetrationRate",
-                "value": 80
             }
         ]
     },
     {
-        "name": "私法 大角星",
-        "basename": "大角星",
+        "name": "弃子重执",
+        "basename": "弃子重执",
         "weaponType": "Rifle",
-        "subWeaponType": "LaserGun",
-        "isPrime": true,
-        "properties": [
-            {
-                "type": "Physics",
-                "value": 25.0
-            },
-            {
-                "type": "Cold",
-                "value": 35.0
-            },
-            {
-                "type": "CriticalChance",
-                "value": 19.0
-            },
-            {
-                "type": "CriticalDamage",
-                "value": 210.0
-            },
-            {
-                "type": "MultiStrike",
-                "value": 1.0
-            },
-            {
-                "type": "TriggerChance",
-                "value": 27.0
-            },
-            {
-                "type": "AttackSpeed",
-                "value": 6.0
-            },
-            {
-                "type": "DebuffDuration",
-                "value": 100.0
-            },
-            {
-                "type": "MagazineSize",
-                "value": 20
-            },
-            {
-                "type": "ReloadTime",
-                "value": 1.9
-            }
-        ]
-    },
-    {
-        "name": "聚焦矿灯",
-        "basename": "聚焦矿灯",
-        "weaponType": "Rifle",
-        "subWeaponType": "LaserGun",
+        "subWeaponType": "AssaultRifle",
         "isPrime": false,
         "properties": [
             {
-                "type": "Electric",
-                "value": 10.0
-            },
-            {
-                "type": "Cracking",
-                "value": 9.0
+                "type": "Fire",
+                "value": 22.0
             },
             {
                 "type": "CriticalChance",
-                "value": 16.0
+                "value": 17.0
             },
             {
                 "type": "CriticalDamage",
-                "value": 190.0
+                "value": 220.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 6.0
             },
             {
                 "type": "MultiStrike",
                 "value": 1.0
             },
             {
-                "type": "TriggerChance",
-                "value": 16.0
-            },
-            {
                 "type": "AttackSpeed",
-                "value": 10.0
+                "value": 5.8
             },
             {
                 "type": "DebuffDuration",
@@ -138,7 +1747,7 @@
             },
             {
                 "type": "MagazineSize",
-                "value": 35
+                "value": 30.0
             },
             {
                 "type": "ReloadTime",
@@ -147,35 +1756,35 @@
         ]
     },
     {
-        "name": "私法 冰封瀑",
-        "basename": "冰封瀑",
-        "weaponType": "Shotgun",
-        "subWeaponType": "Shotgun",
+        "name": "私法反骨",
+        "basename": "私法反骨",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
         "isPrime": true,
         "properties": [
             {
-                "type": "Cold",
-                "value": 18.0
+                "type": "Physics",
+                "value": 28.0
             },
             {
                 "type": "CriticalChance",
-                "value": 24.0
+                "value": 18.0
             },
             {
                 "type": "CriticalDamage",
-                "value": 170.0
-            },
-            {
-                "type": "MultiStrike",
-                "value": 8.0
+                "value": 260.0
             },
             {
                 "type": "TriggerChance",
-                "value": 7.0
+                "value": 17.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
             },
             {
                 "type": "AttackSpeed",
-                "value": 3.5
+                "value": 9.4
             },
             {
                 "type": "DebuffDuration",
@@ -183,85 +1792,273 @@
             },
             {
                 "type": "MagazineSize",
-                "value": 15
+                "value": 30.0
             },
             {
                 "type": "ReloadTime",
-                "value": 2.2
+                "value": 1.65
             }
         ]
     },
     {
-        "name" : "特斯拉感生步枪",
-        "basename" : "特斯拉感生步枪",
-        "weaponType" : "Rifle",
-        "subWeaponType" : "SniperRifle",
-        "isPrime" : false,
-        "properties" : [
-            {
-                "type" : "Magnetic",
-                "value" : 522.0
-            },
-            {
-                "type" : "CriticalChance",
-                "value" : 17.0
-            },
-            {
-                "type" : "CriticalDamage",
-                "value" : 190.0
-            },
-            {
-                "type" : "MultiStrike",
-                "value" : 1.0
-            },
-            {
-                "type" : "TriggerChance",
-                "value" : 30.0
-            },
-            {
-                "type" : "AttackSpeed",
-                "value" : 0.8
-            },
-            {
-                "type" : "DebuffDuration",
-                "value" : 100.0
-            },
-            {
-                "type" : "MagazineSize",
-                "value" : 8
-            },
-            {
-                "type" : "ReloadTime",
-                "value" : 2.5
-            }
-        ]
-    },
-    {
-        "name": "噪波",
-        "basename": "噪波",
-        "weaponType": "Pistol",
-        "subWeaponType": "MicroSubmachineGun",
+        "name": "响尾金蟒",
+        "basename": "响尾金蟒",
+        "weaponType": "Rifle",
+        "subWeaponType": "AssaultRifle",
         "isPrime": false,
         "properties": [
             {
-                "type": "Electric",
-                "value": 28.0
+                "type": "Cracking",
+                "value": 26.0
             },
             {
                 "type": "CriticalChance",
-                "value": 23.0
+                "value": 17.0
             },
             {
                 "type": "CriticalDamage",
-                "value": 220.0
+                "value": 200.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 18.0
             },
             {
                 "type": "MultiStrike",
                 "value": 1.0
             },
             {
+                "type": "AttackSpeed",
+                "value": 9.4
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 30.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.65
+            }
+        ]
+    },
+    {
+        "name": "欲壑之径",
+        "basename": "欲壑之径",
+        "weaponType": "Rifle",
+        "subWeaponType": "MachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Ether",
+                "value": 14.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 28.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 160.0
+            },
+            {
                 "type": "TriggerChance",
-                "value": 20.0
+                "value": 11.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 5.5
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 95.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 3.4
+            }
+        ]
+    },
+    {
+        "name": "命数之赐",
+        "basename": "命数之赐",
+        "weaponType": "Rifle",
+        "subWeaponType": "MachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "CriticalChance",
+                "value": 12.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 200.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 11.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 5.5
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "Physics",
+                "value": 8.0
+            },
+            {
+                "type": "Gas",
+                "value": 13.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 85.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 3.0
+            }
+        ]
+    },
+    {
+        "name": "苦海之舟",
+        "basename": "苦海之舟",
+        "weaponType": "Rifle",
+        "subWeaponType": "MachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 21.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 19.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 200.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 7.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 17.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 3.5
+            },
+            {
+                "type": "MagazineSize",
+                "value": 100
+            }
+        ]
+    },
+    {
+        "name": "私法苦海之舟",
+        "basename": "私法苦海之舟",
+        "weaponType": "Rifle",
+        "subWeaponType": "MachineGun",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 25.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 14.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 240.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 8.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 17.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 3.4
+            },
+            {
+                "type": "MagazineSize",
+                "value": 100
+            }
+        ]
+    },
+    {
+        "name": "六箴二诫经纶",
+        "basename": "六箴二诫经纶",
+        "weaponType": "Rifle",
+        "subWeaponType": "MachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 10.0
+            },
+            {
+                "type": "Fire",
+                "value": 10.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 180.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 14.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
             },
             {
                 "type": "AttackSpeed",
@@ -273,11 +2070,113 @@
             },
             {
                 "type": "MagazineSize",
-                "value": 60
+                "value": 200.0
             },
             {
                 "type": "ReloadTime",
-                "value": 1.2
+                "value": 3.8
+            }
+        ]
+    },
+    {
+        "name": "八风荡",
+        "basename": "八风荡",
+        "weaponType": "Rifle",
+        "subWeaponType": "MachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Electric",
+                "value": 8.0
+            },
+            {
+                "type": "Virus",
+                "value": 10.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 20.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 180.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 12.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 15.0
+            },
+            {
+                "type": "Headshot",
+                "value": 20.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 220.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 3.5
+            }
+        ]
+    },
+    {
+        "name": "咆哮逆境",
+        "basename": "咆哮逆境",
+        "weaponType": "Rifle",
+        "subWeaponType": "MachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 7.0
+            },
+            {
+                "type": "Fire",
+                "value": 6.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 19.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 150.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 12.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 17.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 190.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 3.7
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
             }
         ]
     }

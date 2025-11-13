@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 
 
-QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
+# QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
 
 def main():
     app = QApplication(sys.argv)

@@ -51,6 +51,13 @@ class IVTContext:
         
         self._allCards = load_cards()
         self._allWeapons = load_weapons()
+
+        # 检查所有武器数据是否正确
+        for weapon in self._allWeapons:
+            print(f"初始化武器: {weapon.name}")
+            dpsReq = DPSRequest(weapon, [])
+            dpsReq.calculate()
+
         self._lastDPSRequest: DPSRequest | None = None
 
     def getAllCards(self):

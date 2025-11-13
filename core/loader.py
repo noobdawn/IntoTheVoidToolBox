@@ -3,6 +3,7 @@ import os
 from .ivtcard import WeaponCardCommon, WeaponCardRiven, WeaponCardSpecial
 from .ivtenum import WeaponPropertyType, WeaponType, SubWeaponType, CardSet, Slot
 from .ivtproperty import WeaponProperty
+from .ivtweapon import Weapon
 
 COMMON_CARD_JSON_PATH = 'data/cards.json'
 RIVEN_CARD_JSON_PATH = 'data/rivens.json'
@@ -28,9 +29,6 @@ def _load_common_cards():
 
     common_cards = []
     for cardData in data:
-        if cardData['name'] == "熔岩枪管":
-            print("调试点")
-
         # 解析属性
         properties = []
         for propData in cardData.get('properties', []):
@@ -189,6 +187,43 @@ def _load_weapon_data():
         )
         weapons.append(weapon)
     return weapons
+
+def save_weapon(weapon : Weapon) -> bool:
+    weaponData = {
+        'name': weapon.name,
+        'basename': weapon.basename,
+        'weaponType': weapon.weaponType.name,
+        'subWeaponType': weapon.subWeaponType.name,
+        'properties': [{'type': prop.propertyType.name, 'value': prop.baseValue} for prop in weapon.snapshot.getBasePropertiesRef()]
+    }
+
+    allWeapons = []
+    # 1. 读取现有数据
+    if os.path.exists(WEAPON_JSON_PATH):
+        try:
+            with open(WEAPON_JSON_PATH, 'r', encoding='utf-8') as file:
+                content = file.read()
+                if content:
+                    allWeapons = json.loads(content)
+                if not isinstance(allWeapons, list):
+                    return False
+        except (json.JSONDecodeError, FileNotFoundError) as e:
+            print(f"读取现有武器数据失败: {e}")
+            return False
+    # 2. 添加新武器
+    allWeapons.append(weaponData)
+    # 3. 写回文件   
+    try:
+        with open(WEAPON_JSON_PATH, 'w', encoding='utf-8') as file:
+            json.dump(allWeapons, file, ensure_ascii=False, indent=4)
+
+        # 4. 更新全局缓存
+        global ALL_WEAPONS
+        ALL_WEAPONS = allWeapons
+        return True
+    except IOError as e:
+        print(f"保存武器数据失败: {e}")
+        return False
 
 def save_riven_card(card : WeaponCardRiven) -> bool:
     cardData = {
