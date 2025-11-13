@@ -6,6 +6,7 @@ from .ivtdebuff import ElementDebuffState
 import numpy as np
 import math
 import random
+import copy
 
 CRITICAL_RNG = 0.0
 TRIGGER_RNG = 0.0
@@ -193,11 +194,24 @@ def TriggerElementDebuff(damage : np.ndarray) -> DamageType:
     # 动能伤害不参与异常触发
     dmg[WeaponPropertyType.Physics.value] = 0.0
     totalElementDamage = dmg.sum()
-    currentThreshold = 0.0
-    for i in range(WeaponPropertyType.Cold.value, WeaponPropertyType.Virus.value + 1):
-        currentThreshold += dmg[i] / totalElementDamage
-        if random.random() < currentThreshold:
-            return DamageType(i)
+    
+    # 如果没有元素伤害，直接返回None
+    if totalElementDamage == 0:
+        return None
+    
+    # 提取元素伤害部分
+    elementDamage = dmg[WeaponPropertyType.Cold.value:WeaponPropertyType.Virus.value + 1]
+    
+    # 计算概率分布并累加
+    probabilities = elementDamage / totalElementDamage
+    cumulative_probs = np.cumsum(probabilities)
+    
+    # 生成随机数并使用searchsorted快速查找
+    currentRandom = random.random()
+    index = np.searchsorted(cumulative_probs, currentRandom, side='right')
+    
+    # 转换回DamageType
+    return DamageType(index + WeaponPropertyType.Cold.value)
 
 class DPSRequest:
     '''
@@ -218,6 +232,19 @@ class DPSRequest:
         self.magazineDamage = 0
         self.averageDps = 0
         self.finalSnapshot = None
+
+    '''
+    从一个DPSRequest创建一个新的DPSRequest
+    使用深拷贝确保新请求与原请求完全独立，互不影响
+    '''
+    @classmethod
+    def createNewOne(cls, other: 'DPSRequest') -> 'DPSRequest':
+        newRequest = cls(weapon=other.weapon, cards=copy.deepcopy(other.cards))
+        newRequest.moveState = other.moveState
+        newRequest.cardSetInfo = other.cardSetInfo
+        newRequest.characterInfo = other.characterInfo
+        newRequest.targetInfo = copy.deepcopy(other.targetInfo)
+        return newRequest
 
     def calculate(self):
         '''
@@ -258,7 +285,9 @@ class DPSRequest:
         global CRITICAL_RNG, TRIGGER_RNG
         CRITICAL_RNG = 0.0
         TRIGGER_RNG = 0.0
-        random.seed(114514)
+        random.seed(0)
+        # 清除元素异常
+        self.targetInfo.elementDebuffState.clearDebuff()
         # 初始化造成的伤害
         damageTaken = 0.0
         # 计算实际发射的子弹数

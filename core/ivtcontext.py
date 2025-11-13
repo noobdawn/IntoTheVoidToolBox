@@ -16,6 +16,7 @@ class UISignals(QObject):
     cardSlotSelected = pyqtSignal(int)
     weaponBuildRequestChanged = pyqtSignal()
     dpsResultCompleted = pyqtSignal(DPSRequest)
+    dpsMethodChanged = pyqtSignal(int)
 
 class HotkeyListener(QObject):
     '''

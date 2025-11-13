@@ -215,10 +215,10 @@ class WeaponPropertySnapshot:
             finalValue = weaponProperty.getAddon() * baseDamage / 100.0
             weaponProperty.setFinalValue(finalValue)
         for weaponProperty in constantElementDamageArray:
-            finalValue = weaponProperty.getAddon()
+            finalValue = weaponProperty.getAddon() * baseDamage / 100.0
             weaponProperty.setFinalValue(finalValue)
         # 将枪械本身的元素伤害属性添加到variableElementDamageArray末尾，然后清空快照中所有元素伤害属性
-        for propertyTypeValue in range(10):
+        for propertyTypeValue in range(11):
             propertyType = WeaponPropertyType(propertyTypeValue)
             if self.__finalPropertyData.get(propertyType) != 0:
                 value = self.__finalPropertyData.getValue(propertyType)
@@ -381,7 +381,7 @@ class WeaponPropertySnapshot:
 
         # 最后将对所有伤害进行AllDamage的加成
         allDamageAddon = self.__finalPropertyData.getAddon(WeaponPropertyType.AllDamage)
-        for propertyTypeValue in range(10):
+        for propertyTypeValue in range(11):
             propertyType = WeaponPropertyType(propertyTypeValue)
             baseValue = self.__finalPropertyData.getValue(propertyType)
             if baseValue != 0.0:
@@ -397,7 +397,7 @@ class WeaponPropertySnapshot:
         physicalDamage = self.getTotalDamageArray()[WeaponPropertyType.Physics.value]
         convertedPhysicalDamage = (totalDamage - physicalDamage) * ghostCardCount + physicalDamage
         # 清空非动能伤害属性
-        for propertyTypeValue in range(10):
+        for propertyTypeValue in range(11):
             propertyType = WeaponPropertyType(propertyTypeValue)
             self.__finalPropertyData.setFinalValue(propertyType, 0.0)
         # 设置新的动能伤害属性

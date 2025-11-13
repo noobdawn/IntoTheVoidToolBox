@@ -32,8 +32,17 @@ class CardArea(CardWidget):
         CONTEXT.uiSignals.weaponChanged.connect(self._onWeaponChanged)
         CONTEXT.uiSignals.dpsResultCompleted.connect(self._onDPSResultCompleted)
         CONTEXT.uiSignals.cardSlotSelected.connect(self._onCardSlotSelected)
+        CONTEXT.uiSignals.dpsMethodChanged.connect(self._onDpsMethodChanged)
 
         self.weapon = None
+        self.dpsMethod = 0
+
+    def _onDpsMethodChanged(self, method: int):
+        '''
+        设置DPS计算方法
+        '''
+        self.dpsMethod = method
+        self._onDPSResultCompleted(CONTEXT._lastDPSRequest)
 
     def _init_cards(self, cards: list[WeaponCardCommon | WeaponCardRiven | WeaponCardSpecial]):
         '''
@@ -67,6 +76,9 @@ class CardArea(CardWidget):
                     filteredCards.append(card)
                 elif (card.weaponType == weaponType and (card.subWeaponType == subWeaponType or card.subWeaponType == SubWeaponType.All)):
                     filteredCards.append(card)
+            if isinstance(card, WeaponCardRiven):
+                if (card.weaponName == weapon.basename):
+                    filteredCards.append(card)
 
         # 初始化显示的卡片
         self._init_cards(filteredCards)
@@ -92,10 +104,15 @@ class CardArea(CardWidget):
                 if card in request.cards:
                     cardWidget.setPriority(0.0)
                     continue
-                newRequest = copy.deepcopy(request)
+                newRequest = DPSRequest.createNewOne(request)
                 newRequest.cards[slotIndex] = card
                 newRequest.calculate()
-                priority = (newRequest.averageDps - request.averageDps) / request.averageDps
+                if self.dpsMethod == 0:
+                    priority = (newRequest.magazineDamage - request.magazineDamage) / request.magazineDamage
+                elif self.dpsMethod == 1:
+                    priority = (newRequest.magazineDps - request.magazineDps) / request.magazineDps
+                else:
+                    priority = (newRequest.averageDps - request.averageDps) / request.averageDps
                 cardWidget.setPriority(priority)
         # 重新排序显示的执行卡
         sortedCardWidgets = sorted(cardWidgets, key=lambda w: w.priority, reverse=True)
@@ -129,6 +146,9 @@ class CardArea(CardWidget):
                 if (card.weaponType == WeaponType.All):
                     filteredCards.append(card)
                 elif (card.weaponType == weaponType and (card.subWeaponType == subWeaponType or card.subWeaponType == SubWeaponType.All)):
+                    filteredCards.append(card)
+            elif slotIndex != 8 and isinstance(card, WeaponCardRiven):
+                if (card.weaponName == self.weapon.basename):
                     filteredCards.append(card)
             elif slotIndex == 8 and isinstance(card, WeaponCardSpecial):
                 if (card.weaponName == self.weapon.basename):

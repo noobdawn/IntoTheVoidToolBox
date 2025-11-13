@@ -79,6 +79,19 @@ class WeaponPropertyCard(CardWidget):
         self.title = SubtitleLabel("武器属性")
         self.contentLayout.addWidget(self.title)
 
+        # MOD提升统计方法选择
+        self.dpsMethodLayout = QHBoxLayout()
+        self.dpsMethodLabel = QLabel("MOD提升统计方法:")
+        self.dpsMethodComboBox = ComboBox()
+        self.dpsMethodComboBox.addItem("单次爆发伤害量")
+        self.dpsMethodComboBox.addItem("单次爆发DPS")
+        self.dpsMethodComboBox.addItem("平均DPS")
+        self.dpsMethodComboBox.setCurrentIndex(0)
+        self.dpsMethodLayout.addWidget(self.dpsMethodLabel)
+        self.dpsMethodLayout.addWidget(self.dpsMethodComboBox)
+        self.contentLayout.addLayout(self.dpsMethodLayout)
+        self.dpsMethodComboBox.currentIndexChanged.connect(self._onDpsMethodChanged)
+
         self.propertyLayout = QVBoxLayout()
         self.contentLayout.addLayout(self.propertyLayout)
         self.contentLayout.addStretch(1)
@@ -88,6 +101,12 @@ class WeaponPropertyCard(CardWidget):
 
         signals = CONTEXT.uiSignals
         signals.dpsResultCompleted.connect(self._updateLabels)
+
+    def _onDpsMethodChanged(self, index):
+        '''
+        当MOD提升统计方法改变时触发信号
+        '''
+        CONTEXT.uiSignals.dpsMethodChanged.emit(index)
 
     def _addPropertyLabel(self, name: str, value, tooltip=None):
         '''
@@ -138,7 +157,7 @@ class WeaponPropertyCard(CardWidget):
         self._addPropertyLabel('单次爆发DPS', request.magazineDps, tooltip='单个弹匣造成的每秒伤害')
         self._addPropertyLabel('平均DPS', request.averageDps, tooltip='计入换弹时间后的每秒伤害')
 
-        damage = weapon.snapshot.getTotalDamageArray().sum()
+        damage = request.finalSnapshot.getTotalDamageArray().sum()
         self._addPropertyLabel('面板总伤害', damage, tooltip='武器面板伤害，计入魈鬼系列卡牌的元素转化')
 
         for weaponPropType in WeaponPropertyType:

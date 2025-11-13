@@ -25,6 +25,8 @@ class CardSlot(MiniCard):
         设置卡槽中的执行卡
         '''
         super().setCard(card)
+        if card is None:
+            self.backgroundPixmap = QPixmap('assets/ui/empty_frame.png')
         self.update()
         CONTEXT.uiSignals.weaponBuildRequestChanged.emit()
 
