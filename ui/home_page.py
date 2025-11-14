@@ -13,7 +13,7 @@ class HomePage(QFrame):
 
         self.banner = QLabel(self)
         self.banner.setScaledContents(True)
-        self.banner.setFixedSize(800, 200)
+        self.banner.setMaximumSize(800, 300)
         self.banner.setObjectName('banner')
 
         self.image_paths = self._load_image_paths('assets/images')
@@ -75,7 +75,7 @@ class HomePage(QFrame):
 
         # GitHub
         info_card.layout().addWidget(SubtitleLabel("GitHub"))
-        github_label = BodyLabel('<a href="https://github.com/noobdawn/BestRivenIVT">https://github.com/noobdawn/BestRivenIVT</a>')
+        github_label = BodyLabel('<a href="https://github.com/noobdawn/IntoTheVoidToolBox">https://github.com/noobdawn/IntoTheVoidToolBox</a>')
         github_label.setOpenExternalLinks(True)
         info_card.layout().addWidget(github_label)
 

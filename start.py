@@ -1,13 +1,14 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QSplashScreen
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QIcon
 
 
 # QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
 
 def main():
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon('assets/ico/intothevoid.ico'))
 
     splash_pix = QPixmap('assets/splash/splash.jpg')
     splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)

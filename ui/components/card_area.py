@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout
 from qfluentwidgets import ScrollArea, CardWidget, TitleLabel
 from .selectable_mini_card import SelectableMiniCard
 from .flow_layout import FlowLayout
+from .seamless_scroll_area import SeamlessScrollArea
 import copy
 
 from core.ivtcard import WeaponCardCommon, WeaponCardRiven, WeaponCardSpecial
@@ -21,7 +22,7 @@ class CardArea(CardWidget):
         self.setObjectName("cardArea")
 
         self.mainLayout = QVBoxLayout(self)
-        self.scrollArea = ScrollArea(self)
+        self.scrollArea = SeamlessScrollArea(self)
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidget = QWidget()
         self.flowLayout = FlowLayout(self.scrollAreaWidget)

@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QMenu, QMessageBox
 from PyQt5.QtGui import QPixmap, QPainter, QFont, QColor
-from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtCore import Qt, pyqtSignal, QSize
 
 from .cost_panel import CostPanel
 
@@ -143,3 +143,6 @@ class MiniCard(QWidget):
         if reply == QMessageBox.Yes:
             CONTEXT.deleteRivenCard(self.card)
             CONTEXT.uiSignals.rivenCardChanged.emit(self.card)
+
+    def sizeHint(self):
+        return QSize(124, 128)

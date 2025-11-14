@@ -93,12 +93,4 @@ IntoTheVoidToolBox/
 
 ## 📋 TODO List
 
-- [ ] Add character execution card loadout functionality
-- [ ] Support saving and loading loadout schemes
-- [ ] Add loadout sharing feature (export/import)
-- [ ] Optimize damage calculation algorithm
-- [ ] Add more visualization charts
-- [ ] Support multi-language interface
-- [ ] Add execution card recommendation system
-- [ ] Implement loadout comparison feature
-- [ ] Add automatic game data update functionality
+Wait for 2.0 update! 

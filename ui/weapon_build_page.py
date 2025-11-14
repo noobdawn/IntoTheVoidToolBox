@@ -7,6 +7,7 @@ from ui.components.autocompletion_combo_box import AutocompletionComboBox
 from ui.components.foldable_card_widget import FoldableCardWidget
 from ui.components.card_area import CardArea
 from ui.components.card_slot import CardSlot
+from ui.components.seamless_scroll_area import SeamlessScrollArea
 
 from core.ivtcontext import CONTEXT
 from core.ivtenum import (WeaponPropertyType, EnemyMaterial, DamageType, SkillDebuff, AvailableCardSets, CardSet, CharacterPropertyType)
@@ -470,6 +471,33 @@ class CardSlotCard(CardWidget):
         CONTEXT.uiSignals.cardSlotSelected.connect(self._onCardSlotSelected)
         CONTEXT.uiSignals.miniCardSelected.connect(self._onCardSelected)
 
+    def sizeHint(self):
+        '''
+        动态计算组件的建议尺寸
+        '''
+        from PyQt5.QtCore import QSize
+        
+        if not self.cardSlots:
+            return super().sizeHint()
+        
+        # 获取单个卡槽的尺寸
+        slotSize = self.cardSlots[0].sizeHint()
+        spacing = self.gridLayout.spacing()
+        margins = self.gridLayout.contentsMargins()
+        
+        # 计算总宽度: 9个卡槽 + 8个间距 + 左右边距
+        width = slotSize.width() * 9 + spacing * 8 + margins.left() + margins.right()
+        # 计算高度: 卡槽高度 + 上下边距
+        height = slotSize.height() + margins.top() + margins.bottom()
+        
+        return QSize(width, height)
+    
+    def minimumSizeHint(self):
+        '''
+        返回最小尺寸提示
+        '''
+        return self.sizeHint()
+
     def _onCardSlotSelected(self, slotIndex: int):
         '''
         当卡槽被选中时调用此方法
@@ -517,28 +545,43 @@ class WeaponBuildPage(QFrame):
         self.topLayout.setContentsMargins(0, 0, 0, 0)
         self.topLayout.setSpacing(10)
 
+        # 创建无痕滚动区域
+        self.leftScrollArea = SeamlessScrollArea(self)
+        self.leftScrollArea.setWidgetResizable(True)
+        self.leftScrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.leftScrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        
+        # 滚动区域内容容器
+        self.leftScrollWidget = QWidget()
+        self.leftScrollArea.setWidget(self.leftScrollWidget)
+        
         # 左上方布局
-        self.leftTopLayout = QVBoxLayout()
+        self.leftTopLayout = QVBoxLayout(self.leftScrollWidget)
         self.leftTopLayout.setContentsMargins(0, 0, 0, 0)
         self.leftTopLayout.setSpacing(10)
+        self.leftTopLayout.setAlignment(Qt.AlignTop)
 
         # 武器选择卡片
-        self.weaponSelectCard = WeaponSelectCard(self)
+        self.weaponSelectCard = WeaponSelectCard(self.leftScrollWidget)
         self.leftTopLayout.addWidget(self.weaponSelectCard)
         
         # 目标设置卡片
-        self.targetSettingCard = TargetSettingCard(self)
+        self.targetSettingCard = TargetSettingCard(self.leftScrollWidget)
         self.leftTopLayout.addWidget(self.targetSettingCard)
 
         # 角色设置卡片
-        self.characterSettingCard = CharacterSettingCard(self)
+        self.characterSettingCard = CharacterSettingCard(self.leftScrollWidget)
         self.leftTopLayout.addWidget(self.characterSettingCard)
 
         # 卡槽显示卡片
-        self.cardSlotCard = CardSlotCard(self)
+        self.cardSlotCard = CardSlotCard(self.leftScrollWidget)
         self.leftTopLayout.addWidget(self.cardSlotCard)
 
-        self.topLayout.addLayout(self.leftTopLayout)
+        # 设置滚动区域的最小宽度
+        cardSlotCardSize = self.cardSlotCard.sizeHint()
+        self.leftScrollArea.setMinimumWidth(cardSlotCardSize.width() + 20)
+
+        self.topLayout.addWidget(self.leftScrollArea)
         
         # 武器属性卡片
         self.weaponPropertyCard = WeaponPropertyCard(self)
