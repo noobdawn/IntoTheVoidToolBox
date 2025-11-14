@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QFrame, QVBoxLayout, QApplication
 
 from ui.home_page import HomePage
 from ui.weapon_build_page import WeaponBuildPage
+from ui.edit_riven_page import RivenPage
 
 class MainWindow(FluentWindow):
     """
@@ -21,12 +22,15 @@ class MainWindow(FluentWindow):
         # 在这里可以添加更多的UI组件和逻辑
         self.home_page = HomePage(self)
         self.weapon_build_page = WeaponBuildPage(self)
+        self.edit_riven_page = RivenPage(self)
 
         self.home_page.setObjectName("homePage")
         self.weapon_build_page.setObjectName("weaponBuildPage")
+        self.edit_riven_page.setObjectName("editRivenPage")
         
         self.addSubInterface(self.home_page, FIF.HOME, "首页", position=NavigationItemPosition.TOP)
         self.addSubInterface(self.weapon_build_page, FIF.DEVELOPER_TOOLS, "武器配卡", position=NavigationItemPosition.TOP)
+        self.addSubInterface(self.edit_riven_page, FIF.EDIT, "混淆执行卡", position=NavigationItemPosition.TOP)
 
 
 

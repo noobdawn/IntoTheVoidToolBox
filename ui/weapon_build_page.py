@@ -79,9 +79,9 @@ class WeaponPropertyCard(CardWidget):
         self.title = SubtitleLabel("武器属性")
         self.contentLayout.addWidget(self.title)
 
-        # MOD提升统计方法选择
+        # 执行卡提升统计方法选择
         self.dpsMethodLayout = QHBoxLayout()
-        self.dpsMethodLabel = QLabel("MOD提升统计方法:")
+        self.dpsMethodLabel = QLabel("执行卡提升统计方法:")
         self.dpsMethodComboBox = ComboBox()
         self.dpsMethodComboBox.addItem("单次爆发伤害量")
         self.dpsMethodComboBox.addItem("单次爆发DPS")
@@ -104,7 +104,7 @@ class WeaponPropertyCard(CardWidget):
 
     def _onDpsMethodChanged(self, index):
         '''
-        当MOD提升统计方法改变时触发信号
+        当执行卡DPS统计方法改变时触发信号
         '''
         CONTEXT.uiSignals.dpsMethodChanged.emit(index)
 

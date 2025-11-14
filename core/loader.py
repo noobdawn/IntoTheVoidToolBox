@@ -228,7 +228,7 @@ def save_weapon(weapon : Weapon) -> bool:
 def save_riven_card(card : WeaponCardRiven) -> bool:
     cardData = {
         'name': card.name,
-        'properties': [{'type': prop.propertyType.name, 'value': prop.addon} for prop in card.getPropertiesRef()],
+        'properties': [{'type': prop.propertyType.name, 'value': prop.getAddon()} for prop in card.getPropertiesRef()],
         'cost': card.cost,
         'slot': card.slot.value,
         'weaponName': card.weaponName
@@ -245,7 +245,7 @@ def save_riven_card(card : WeaponCardRiven) -> bool:
                 if not isinstance(allRivenCards, list):
                     return False
         except (json.JSONDecodeError, FileNotFoundError) as e:
-            print(f"读取现有紫卡数据失败: {e}")
+            print(f"读取现有混淆执行卡数据失败: {e}")
             return False
     # 2. 添加新卡
     allRivenCards.append(cardData)
@@ -259,7 +259,7 @@ def save_riven_card(card : WeaponCardRiven) -> bool:
         ALL_CARDS = allRivenCards
         return True
     except IOError as e:
-        print(f"保存紫卡数据失败: {e}")
+        print(f"保存混淆执行卡数据失败: {e}")
         return False
     
 def delete_riven_card(card: WeaponCardRiven) -> bool:
@@ -277,7 +277,7 @@ def delete_riven_card(card: WeaponCardRiven) -> bool:
                 if not isinstance(allRivenCards, list):
                     return False
         except (json.JSONDecodeError, FileNotFoundError) as e:
-            print(f"读取现有紫卡数据失败: {e}")
+            print(f"读取现有混淆执行卡数据失败: {e}")
             return False
     # 2. 删除指定卡
     allRivenCards = [cardData for cardData in allRivenCards if cardData.get('name') != card.name or cardData.get('weaponName') != card.weaponName]
@@ -290,5 +290,5 @@ def delete_riven_card(card: WeaponCardRiven) -> bool:
         ALL_CARDS = allRivenCards
         return True
     except IOError as e:
-        print(f"保存紫卡数据失败: {e}")
+        print(f"保存混淆执行卡数据失败: {e}")
         return False

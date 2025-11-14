@@ -1,6 +1,6 @@
 from PyQt5.QtCore import QObject, pyqtSignal
 from pynput import keyboard
-from .loader import load_cards, load_weapons, delete_riven_card
+from .loader import load_cards, load_weapons, delete_riven_card, save_riven_card
 
 from .ivtdps import DPSRequest
 from .ivtweapon import Weapon
@@ -11,7 +11,8 @@ class UISignals(QObject):
     全局UI使用的信号类
     '''
     weaponChanged = pyqtSignal(Weapon)
-    deleteRivenCard = pyqtSignal(WeaponCardRiven)
+    rivenCardChanged = pyqtSignal(WeaponCardRiven)
+    addRivenCard = pyqtSignal(WeaponCardRiven)
     miniCardSelected = pyqtSignal(WeaponCardBase)
     cardSlotSelected = pyqtSignal(int)
     weaponBuildRequestChanged = pyqtSignal()
@@ -60,19 +61,19 @@ class IVTContext:
 
         self._lastDPSRequest: DPSRequest | None = None
 
-    def getAllCards(self):
+    def getAllCards(self) -> list[WeaponCardBase]:
         '''
         获取所有执行卡
         '''
         return self._allCards
     
-    def getAllWeapons(self):
+    def getAllWeapons(self) -> list[Weapon]:
         '''
         获取所有武器
         '''
         return self._allWeapons
     
-    def getWeaponByName(self, name: str):
+    def getWeaponByName(self, name: str) -> Weapon | None:
         '''
         根据名称获取武器
         '''
@@ -81,14 +82,32 @@ class IVTContext:
                 return weapon
         return None
     
+    def getCardByName(self, name: str) -> WeaponCardBase | None:
+        '''
+        根据名称获取执行卡
+        '''
+        for card in self.getAllCards():
+            if card.name == name:
+                return card
+        return None
+    
+    def saveRivenCard(self, card: WeaponCardRiven):
+        '''
+        保存混淆执行卡
+        '''
+        if save_riven_card(card):
+            if card not in self._allCards:
+                self._allCards.append(card)
+            return True
+    
     def deleteRivenCard(self, card: WeaponCardRiven):
         '''
         删除混淆执行卡
         '''
         delete_riven_card(card)
-        if card in self._allCards['riven']:
-            self._allCards['riven'].remove(card)
-
+        if card in self._allCards:
+            self._allCards.remove(card)
+            
     def triggerDpsCalculation(self, request: DPSRequest):
         '''
         触发DPS计算

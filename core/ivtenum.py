@@ -514,7 +514,7 @@ SkillDebuffToString = {
 @unique
 class Slot(Enum):
 	'''
-	MOD卡槽类型
+	执行卡卡槽类型
 	'''
 	Jia = 0
 	Yi = 1
@@ -548,7 +548,7 @@ SlotToText = {
 @unique
 class WeaponRivenRange(Enum):
 	'''
-	混淆MOD的条目组合类型，会影响最终属性的浮动范围
+	混淆执行卡的条目组合类型，会影响最终属性的浮动范围
 	'''
 	PP = 0
 	PPN = 1
@@ -559,7 +559,7 @@ class WeaponRivenRange(Enum):
 		if self in RivenRangeToString:
 			return RivenRangeToString[self]
 		else:
-			raise ValueError(f"未知混淆MOD条目组合类型: {self.value}")
+			raise ValueError(f"未知混淆执行卡条目组合类型: {self.value}")
 
 RivenRangeToString = {
 	WeaponRivenRange.PP: "2 增益 0 减益",
@@ -568,7 +568,7 @@ RivenRangeToString = {
 	WeaponRivenRange.PPPN: "3 增益 1 减益",
 }
 
-# 记录了不同属性在紫卡上的取值范围
+# 记录了不同属性在混淆执行卡上的取值范围
 RivenRangeDict = {
 	WeaponPropertyType.AllDamage : {
 		WeaponType.Rifle : 165,
@@ -670,7 +670,7 @@ RivenRangeDict = {
 	}
 }
 
-# 记录了因为紫卡条目数量而造成的浮动数值
+# 记录了因为混淆执行卡条目数量而造成的浮动数值
 WeaponRivenRangeParams = {
 	WeaponRivenRange.PP: 0.9925,
 	WeaponRivenRange.PPN: 1.24,
@@ -678,7 +678,7 @@ WeaponRivenRangeParams = {
 	WeaponRivenRange.PPPN: 0.94,
 }
 
-# 可作为混淆MOD属性的武器属性类型
+# 可作为混淆执行卡属性的武器属性类型
 AvailableWeaponRivenProperties = [
 	WeaponPropertyType.AllDamage,
 	WeaponPropertyType.Headshot,

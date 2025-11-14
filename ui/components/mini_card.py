@@ -138,8 +138,8 @@ class MiniCard(QWidget):
         删除混淆执行卡
         '''
         reply = QMessageBox.question(self, '确认删除', 
-                                     f'你确定要删除这张自定义紫卡 "{self.card.name}" 吗?',
+                                     f'你确定要删除这张自定义混淆执行卡 "{self.card.name}" 吗?',
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if reply == QMessageBox.Yes:
             CONTEXT.deleteRivenCard(self.card)
-            CONTEXT.uiSignals.deleteRivenCard.emit(self.card)
+            CONTEXT.uiSignals.rivenCardChanged.emit(self.card)

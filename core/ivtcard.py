@@ -74,3 +74,21 @@ class WeaponCardSpecial(WeaponCardExclusive):
     '''
     def __init__(self, name: str, weaponName : str, slot : Slot, cost : int):
         super().__init__(name, weaponName, slot, cost)
+
+def calculateRivenPropertyRange(propertyType: WeaponPropertyType, weaponType: WeaponType, rivenRange: WeaponRivenRange) -> tuple[float, float]:
+    '''
+    计算混淆执行卡的数值范围
+    '''
+    if propertyType not in RivenRangeDict or weaponType not in RivenRangeDict[propertyType]:
+        raise ValueError(f"无法为属性类型 {propertyType} 和武器类型 {weaponType} 计算混淆执行卡属性范围。")
+    
+    baseValue = RivenRangeDict[propertyType][weaponType]
+    if baseValue == 0:
+        return (0, 0)
+    
+    baseValue *= WeaponRivenRangeParams[rivenRange]
+
+    if baseValue < 0:
+        return baseValue, 0
+    else:
+        return 0, baseValue

@@ -63,9 +63,10 @@ class HomePage(QFrame):
         # Usage
         info_card.layout().addWidget(SubtitleLabel("使用方法"))
         info_card.layout().addWidget(BodyLabel(
-            "1. 在自制紫卡页面添加自定义的紫卡。\n"
+            "1. 在自制混淆执行卡页面添加自定义的混淆执行卡。\n"
             "2. 在武器配卡页面选择武器，设置靶标和角色等环境因素。\n"
-            "3. 下方即可预览每张MOD在当前配装下的增幅效果。\n"
+            "3. 下方即可预览每张执行卡在当前配装下的增幅效果。\n"
+            "4. 选择不同的DPS统计方法进行比较，并装配执行卡查看最终伤害组成。\n"
         ))
 
         # Author
