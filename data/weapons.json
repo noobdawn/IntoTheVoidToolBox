@@ -367,7 +367,7 @@
         ]
     },
     {
-        "name": "私法 强袭巨炮",
+        "name": "私法强袭巨炮",
         "basename": "强袭巨炮",
         "weaponType": "Shotgun",
         "subWeaponType": "Shotgun",
@@ -428,7 +428,7 @@
         ]
     },
     {
-        "name": "私法 格斗家",
+        "name": "私法格斗家",
         "basename": "格斗家",
         "weaponType": "Shotgun",
         "subWeaponType": "Shotgun",
@@ -632,7 +632,7 @@
         ]
     },
     {
-        "name": "私法 燃气巨炮",
+        "name": "私法燃气巨炮",
         "basename": "燃气巨炮",
         "weaponType": "Shotgun",
         "subWeaponType": "Shotgun",
@@ -685,7 +685,7 @@
         ]
     },
     {
-        "name": "私法 拳击手",
+        "name": "私法拳击手",
         "basename": "拳击手",
         "weaponType": "Shotgun",
         "subWeaponType": "Shotgun",
@@ -734,7 +734,7 @@
         ]
     },
     {
-        "name": "转译 渴饮巨炮",
+        "name": "转译渴饮巨炮",
         "basename": "渴饮巨炮",
         "weaponType": "Shotgun",
         "subWeaponType": "Shotgun",
@@ -1364,7 +1364,7 @@
     },
     {
         "name": "私法三段步枪",
-        "basename": "私法三段步枪",
+        "basename": "三段步枪",
         "weaponType": "Rifle",
         "subWeaponType": "AssaultRifle",
         "isPrime": true,
@@ -1412,7 +1412,7 @@
         ]
     },
     {
-        "name": "私法 三段步枪",
+        "name": "私法三段步枪",
         "basename": "三段步枪",
         "weaponType": "Rifle",
         "subWeaponType": "AssaultRifle",
@@ -1438,7 +1438,7 @@
     },
     {
         "name": "私法粗糙步枪",
-        "basename": "私法粗糙步枪",
+        "basename": "粗糙步枪",
         "weaponType": "Rifle",
         "subWeaponType": "AssaultRifle",
         "isPrime": true,
@@ -1622,7 +1622,7 @@
     },
     {
         "name": "私法隐忍长枪",
-        "basename": "私法隐忍长枪",
+        "basename": "隐忍长枪",
         "weaponType": "Rifle",
         "subWeaponType": "AssaultRifle",
         "isPrime": true,
@@ -1667,7 +1667,7 @@
     },
     {
         "name": "私法水滴",
-        "basename": "私法水滴",
+        "basename": "水滴",
         "weaponType": "Rifle",
         "subWeaponType": "AssaultRifle",
         "isPrime": true,
@@ -1757,7 +1757,7 @@
     },
     {
         "name": "私法反骨",
-        "basename": "私法反骨",
+        "basename": "反骨",
         "weaponType": "Rifle",
         "subWeaponType": "AssaultRifle",
         "isPrime": true,
@@ -1986,7 +1986,7 @@
     },
     {
         "name": "私法苦海之舟",
-        "basename": "私法苦海之舟",
+        "basename": "苦海之舟",
         "weaponType": "Rifle",
         "subWeaponType": "MachineGun",
         "isPrime": true,
@@ -2177,6 +2177,2013 @@
             {
                 "type": "MultiStrike",
                 "value": 1.0
+            }
+        ]
+    },
+    {
+        "name": "镭射矿灯",
+        "basename": "镭射矿灯",
+        "weaponType": "Rifle",
+        "subWeaponType": "LaserGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 8.0
+            },
+            {
+                "type": "Radiation",
+                "value": 8.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 15.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 160.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 15.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 9.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 50.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.0
+            },
+            {
+                "type": "PenetrationValue",
+                "value": 80.0
+            }
+        ]
+    },
+    {
+        "name": "全能小帮手",
+        "basename": "全能小帮手",
+        "weaponType": "Rifle",
+        "subWeaponType": "LaserGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Fire",
+                "value": 32.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 15.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 220.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 15.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 9.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 50.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.0
+            },
+            {
+                "type": "PenetrationValue",
+                "value": 80.0
+            }
+        ]
+    },
+    {
+        "name": "激能矿灯",
+        "basename": "激能矿灯",
+        "weaponType": "Rifle",
+        "subWeaponType": "LaserGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Magnetic",
+                "value": 12.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 20.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 200.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 14.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 8.5
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 60.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.3
+            }
+        ]
+    },
+    {
+        "name": "震爆矿灯",
+        "basename": "震爆矿灯",
+        "weaponType": "Rifle",
+        "subWeaponType": "LaserGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "CriticalChance",
+                "value": 17.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 170.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 18.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 8.5
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "Physics",
+                "value": 6.0
+            },
+            {
+                "type": "Cracking",
+                "value": 6.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 50.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.1
+            }
+        ]
+    },
+    {
+        "name": "大角星",
+        "basename": "大角星",
+        "weaponType": "Rifle",
+        "subWeaponType": "LaserGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 20.0
+            },
+            {
+                "type": "Cold",
+                "value": 33.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 25.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 160.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 27.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 6.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 20.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.9
+            }
+        ]
+    },
+    {
+        "name": "南十字星",
+        "basename": "南十字星",
+        "weaponType": "Rifle",
+        "subWeaponType": "LaserGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 10.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 200.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 10.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 6.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.9
+            }
+        ]
+    },
+    {
+        "name": "聚焦矿灯",
+        "basename": "聚焦矿灯",
+        "weaponType": "Rifle",
+        "subWeaponType": "LaserGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Electric",
+                "value": 10.0
+            },
+            {
+                "type": "Cracking",
+                "value": 9.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 190.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 16.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 10.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 35.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.0
+            }
+        ]
+    },
+    {
+        "name": "私法激能矿灯",
+        "basename": "激能矿灯",
+        "weaponType": "Rifle",
+        "subWeaponType": "LaserGun",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Magnetic",
+                "value": 19.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 19.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 220.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 16.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 8.6
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 70.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.3
+            }
+        ]
+    },
+    {
+        "name": "白马骑士",
+        "basename": "白马骑士",
+        "weaponType": "Rifle",
+        "subWeaponType": "LaserGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Virus",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 40.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 290.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 18.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 8.5
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 60.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.3
+            }
+        ]
+    },
+    {
+        "name": "私法大角星",
+        "basename": "大角星",
+        "weaponType": "Rifle",
+        "subWeaponType": "LaserGun",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 25.0
+            },
+            {
+                "type": "Cold",
+                "value": 35.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 19.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 210.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 27.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 6.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 20.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.9
+            }
+        ]
+    },
+    {
+        "name": "恶龙骑士",
+        "basename": "恶龙骑士",
+        "weaponType": "Rifle",
+        "subWeaponType": "LaserGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Cold",
+                "value": 7.0
+            },
+            {
+                "type": "Magnetic",
+                "value": 7.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 17.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 190.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 18.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 10.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 35.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.0
+            }
+        ]
+    },
+    {
+        "name": "转译聚焦矿灯",
+        "basename": "聚焦矿灯",
+        "weaponType": "Rifle",
+        "subWeaponType": "LaserGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Electric",
+                "value": 12.0
+            },
+            {
+                "type": "Cracking",
+                "value": 10.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 24.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 240.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 8.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 10.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 35.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.0
+            }
+        ]
+    },
+    {
+        "name": "虹彩吞世者",
+        "basename": "虹彩吞世者",
+        "weaponType": "Rifle",
+        "subWeaponType": "LaserGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 32.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 32.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 256.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 16.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 8.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 64.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.56
+            }
+        ]
+    },
+    {
+        "name": "温柔偏爱",
+        "basename": "温柔偏爱",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 10.0
+            },
+            {
+                "type": "Poison",
+                "value": 11.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 139.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 190.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 18.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 6.5
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 22.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.3
+            }
+        ]
+    },
+    {
+        "name": "绿野之王",
+        "basename": "绿野之王",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Poison",
+                "value": 50.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 14.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 210.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 14.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 7.3
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 25.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.2
+            }
+        ]
+    },
+    {
+        "name": "折跃晶光",
+        "basename": "折跃晶光",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 200.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 10.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "Physics",
+                "value": 6.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 8.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 5.0
+            }
+        ]
+    },
+    {
+        "name": "纵火拳铳",
+        "basename": "纵火拳铳",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Fire",
+                "value": 24.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 14.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 160.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 14.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 7.2
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 25.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.2
+            }
+        ]
+    },
+    {
+        "name": "追击拳铳",
+        "basename": "追击拳铳",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 20.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 20.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 210.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 17.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 7.6
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 16.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.3
+            },
+            {
+                "type": "PenetrationValue",
+                "value": 60.0
+            }
+        ]
+    },
+    {
+        "name": "偏爱",
+        "basename": "偏爱",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Electric",
+                "value": 25.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 23.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 180.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 18.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 6.4
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 18.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.35
+            }
+        ]
+    },
+    {
+        "name": "戏法拳铳",
+        "basename": "戏法拳铳",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 12.0
+            },
+            {
+                "type": "Virus",
+                "value": 6.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 220.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 13.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 6.7
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 30.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.3
+            }
+        ]
+    },
+    {
+        "name": "私法纵火拳铳",
+        "basename": "纵火拳铳",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Fire",
+                "value": 27.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 170.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 16.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 7.3
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 25.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.2
+            }
+        ]
+    },
+    {
+        "name": "私法追击拳铳",
+        "basename": "追击拳铳",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 28.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 18.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 230.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 19.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 7.7
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 16.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.3
+            },
+            {
+                "type": "PenetrationValue",
+                "value": 60.0
+            }
+        ]
+    },
+    {
+        "name": "私法戏法拳铳",
+        "basename": "戏法拳铳",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 23.0
+            },
+            {
+                "type": "Virus",
+                "value": 10.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 210.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 18.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 6.7
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 30.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.3
+            }
+        ]
+    },
+    {
+        "name": "伏鸣敕",
+        "basename": "伏鸣敕",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 5.0
+            },
+            {
+                "type": "Magnetic",
+                "value": 5.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 15.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 180.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 12.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 7.3
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 25.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.2
+            }
+        ]
+    },
+    {
+        "name": "八岐羽",
+        "basename": "八岐羽",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Radiation",
+                "value": 23.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 170.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 13.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 6.7
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 30.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.55
+            }
+        ]
+    },
+    {
+        "name": "私法八岐羽",
+        "basename": "八岐羽",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Radiation",
+                "value": 29.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 180.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 17.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 30.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.55
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 7.0
+            }
+        ]
+    },
+    {
+        "name": "蝰影重重",
+        "basename": "蝰影重重",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Cracking",
+                "value": 12.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 22.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 190.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 10.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 3.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 6.4
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 22.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "私法偏爱",
+        "basename": "偏爱",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Electric",
+                "value": 31.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 23.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 210.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 23.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 6.4
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 18.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.35
+            }
+        ]
+    },
+    {
+        "name": "私法伏鸣敕",
+        "basename": "伏鸣敕",
+        "weaponType": "Pistol",
+        "subWeaponType": "AutoPistol",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 5.0
+            },
+            {
+                "type": "Magnetic",
+                "value": 6.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 15.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 220.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 10.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 7.3
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 25.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.2
+            }
+        ]
+    },
+    {
+        "name": "报童的踌躇",
+        "basename": "报童的踌躇",
+        "weaponType": "Pistol",
+        "subWeaponType": "MicroSubmachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "CriticalChance",
+                "value": 15.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 190.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 13.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "Physics",
+                "value": 4.0
+            },
+            {
+                "type": "Electric",
+                "value": 4.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 12.8
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "报童的信任",
+        "basename": "报童的信任",
+        "weaponType": "Pistol",
+        "subWeaponType": "MicroSubmachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 5.0
+            },
+            {
+                "type": "Magnetic",
+                "value": 10.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 19.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 230.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 13.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 12.8
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "报童的继承",
+        "basename": "报童的继承",
+        "weaponType": "Pistol",
+        "subWeaponType": "MicroSubmachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 5.0
+            },
+            {
+                "type": "Gas",
+                "value": 5.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 16.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 210.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 8.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 16.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "报童的胆怯",
+        "basename": "报童的胆怯",
+        "weaponType": "Pistol",
+        "subWeaponType": "MicroSubmachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Cracking",
+                "value": 8.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 13.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 190.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 14.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 13.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "法尔之石",
+        "basename": "法尔之石",
+        "weaponType": "Pistol",
+        "subWeaponType": "MicroSubmachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Ether",
+                "value": 12.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 20.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 200.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 159.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 13.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "努阿达之剑",
+        "basename": "努阿达之剑",
+        "weaponType": "Pistol",
+        "subWeaponType": "MicroSubmachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 8.0
+            },
+            {
+                "type": "Cold",
+                "value": 5.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 169.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 220.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 20.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 9.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.8
+            }
+        ]
+    },
+    {
+        "name": "鲁格之矛",
+        "basename": "鲁格之矛",
+        "weaponType": "Pistol",
+        "subWeaponType": "MicroSubmachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 5.0
+            },
+            {
+                "type": "Gas",
+                "value": 8.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 15.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 220.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 17.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 11.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.8
+            }
+        ]
+    },
+    {
+        "name": "私法努阿达之剑",
+        "basename": "努阿达之剑",
+        "weaponType": "Pistol",
+        "subWeaponType": "MicroSubmachineGun",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 12.0
+            },
+            {
+                "type": "Cold",
+                "value": 12.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 15.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 300.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 26.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 2.5
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 7.0
+            }
+        ]
+    },
+    {
+        "name": "私法法尔之石",
+        "basename": "法尔之石",
+        "weaponType": "Pistol",
+        "subWeaponType": "MicroSubmachineGun",
+        "isPrime": true,
+        "properties": [
+            {
+                "type": "Ether",
+                "value": 14.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 15.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 290.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 13.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 14.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "绝望佩斯托",
+        "basename": "绝望佩斯托",
+        "weaponType": "Pistol",
+        "subWeaponType": "MicroSubmachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 5.0
+            },
+            {
+                "type": "Cold",
+                "value": 12.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 19.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 160.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 14.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 12.8
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "极乐佩斯托",
+        "basename": "极乐佩斯托",
+        "weaponType": "Pistol",
+        "subWeaponType": "MicroSubmachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 5.0
+            },
+            {
+                "type": "Electric",
+                "value": 6.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 23.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 150.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 14.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 12.8
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "迷幻佩斯托",
+        "basename": "迷幻佩斯托",
+        "weaponType": "Pistol",
+        "subWeaponType": "MicroSubmachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Physics",
+                "value": 5.0
+            },
+            {
+                "type": "Radiation",
+                "value": 5.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 13.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 180.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 13.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 12.8
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "转译报童的胆怯",
+        "basename": "报童的胆怯",
+        "weaponType": "Pistol",
+        "subWeaponType": "MicroSubmachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Cracking",
+                "value": 12.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 18.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 220.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 3.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 13.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 40.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.5
+            }
+        ]
+    },
+    {
+        "name": "噪波",
+        "basename": "噪波",
+        "weaponType": "Pistol",
+        "subWeaponType": "MicroSubmachineGun",
+        "isPrime": false,
+        "properties": [
+            {
+                "type": "Electric",
+                "value": 28.0
+            },
+            {
+                "type": "CriticalChance",
+                "value": 23.0
+            },
+            {
+                "type": "CriticalDamage",
+                "value": 220.0
+            },
+            {
+                "type": "TriggerChance",
+                "value": 20.0
+            },
+            {
+                "type": "MultiStrike",
+                "value": 1.0
+            },
+            {
+                "type": "AttackSpeed",
+                "value": 12.0
+            },
+            {
+                "type": "DebuffDuration",
+                "value": 100.0
+            },
+            {
+                "type": "MagazineSize",
+                "value": 60.0
+            },
+            {
+                "type": "ReloadTime",
+                "value": 1.2
             }
         ]
     }

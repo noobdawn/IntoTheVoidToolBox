@@ -1,4 +1,4 @@
-# IntoTheVoidToolBox
+# IntoTheVoidToolBox — "Into the Void" Toolbox
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
@@ -7,90 +7,69 @@
 
 ## 📖 Overview
 
-Welcome to the IntoTheVoidToolBox!
+Welcome to the "Into the Void" Toolbox!
 
-This tool provides external utility features for the game "Into the Void". Currently, it offers basic weapon execution card loadout functionality, with potential future additions such as character execution card loadouts.
+This tool aims to provide out-of-game functional support for the game "Into the Void". Currently, this toolbox offers basic weapon execution card loadout functionality. Other features, such as character execution card loadouts, may be provided in the future.
 
-**Disclaimer**: This tool is independently developed and has no affiliation with the game's developer, Hangzhou Jinzhang Shu Technology Co., Ltd.
+**Disclaimer**: This tool is developed by an individual and has no affiliation with the developer of "Into the Void", Hangzhou Jinzhangshu Technology Co., Ltd.
 
-## ✨ Feature Pages Overview
+## ✨ Feature Introduction
 
 ### 🔫 Weapon Execution Card Loadout
 
-Install and uninstall execution cards here, experiment with different execution card combinations, and choose different damage calculation methods to view the improvement percentage of execution cards.
+Install and uninstall execution cards here, experiment with different card combinations, and select various damage calculation methods to see the improvement from the cards.
 
-### 💎 Custom Riven Execution Card Editor
+Currently, it only supports execution card loadouts for three weapon types: rifles, pistols, and shotguns. Bows and launchers are not yet supported due to their charging mechanics; melee weapons are also not supported because they do not consume ammo, lack a multishot mechanic, and have unique attack modes like sword waves.
 
-Record custom riven execution cards to help calculate execution card benefits.
+Note that the damage calculation here only considers the output within a single magazine. For weapons with low status chance, the DPS from elemental status effects may be inaccurate. For weapons with low magazine capacity, the DPS may also be skewed due to random factors like critical hits. Additionally, status duration is not considered, so weapons with low status chance and large magazine capacity might have their DPS overestimated.
 
-## 🎯 Usage
+### 💎 Custom Riven Card Editor
 
-1. **Add Custom Riven Execution Cards**
-   - Navigate to "Custom Riven Execution Card" page
-   - Fill in card name, select weapon type, number of affixes, and polarity
-   - Add properties and set values
-   - Click save button
+You can input custom riven cards to help calculate their benefits.
 
-2. **Configure Weapon Build**
-   - Navigate to "Weapon Loadout" page
-   - Select target weapon from dropdown menu, or input text for auto-completion
-   - Set environment parameters such as target type, armor level, etc.
-   - Configure character buff effects (e.g., skill damage boost)
+The affix types and bonus ranges are not restricted, so you can consider inputting special riven cards to simulate the effects of other cards, such as the "Vigilante Armaments" for machine guns.
 
-3. **Select Execution Cards**
-   - Browse available execution cards in the list below
-   - View each card's amplification effect in current loadout
-   - Click on an empty execution card slot, then select a card to equip it
-   - Right-click on equipped cards to unequip
+## 🎯 How to Use
 
-4. **View Damage Analysis**
-   - Choose different DPS calculation methods for comparison
+1.  **Add a Custom Riven Card**
+    *   Go to the "Custom Riven Card" page.
+    *   Fill in the card name, select the weapon type, number of affixes, and polarity.
+    *   Add properties and set their values.
+    *   Click the save button.
+
+2.  **Configure Weapon Build**
+    *   Go to the "Weapon Loadout" page.
+    *   Select the target weapon from the dropdown menu or enter text for auto-completion.
+    *   Set environmental parameters such as target type, armor level, etc.
+    *   Configure character buffs (e.g., skill damage increase).
+
+3.  **Select Execution Cards**
+    *   Browse available execution cards in the list below.
+    *   View the enhancement effect of each card in the current loadout.
+    *   Click on an empty execution card slot, then select a card to equip it.
+    *   Right-click on an equipped execution card to unequip it.
+
+4.  **View Damage Analysis**
+    *   Select different DPS calculation methods for comparison.
 
 ## 📚 Dependencies
 
-This project depends on the following main libraries:
+This project relies on the following main libraries:
 
-- **PyQt5**: Cross-platform GUI framework
-- **PyQt-Fluent-Widgets**: Fluent Design style UI component library
-- **pynput**: Keyboard and mouse input monitoring
-- **numpy**: High-performance numerical computing library
+*   **PyQt5**: A cross-platform GUI framework.
+*   **PyQt-Fluent-Widgets**: A UI component library with a Fluent Design style.
+*   **pynput**: A library for monitoring keyboard and mouse input.
+*   **numpy**: A high-performance numerical computing library.
 
-See [requirements.txt](requirements.txt) for the complete dependency list.
-
-## 🛠️ Development
-
-### Project Structure
-
-```
-IntoTheVoidToolBox/
-├── assets/              # Resource files
-│   ├── images/          # Carousel images
-│   ├── splash/          # Splash screen
-│   └── ui/              # UI assets
-├── core/                # Core business logic
-│   ├── ivtcard.py       # Execution card data structures
-│   ├── ivtcontext.py    # Global context management
-│   ├── ivtdps.py        # Damage calculation engine
-│   ├── ivtenum.py       # Enumeration type definitions
-│   ├── ivtproperty.py   # Property system
-│   ├── ivtweapon.py     # Weapon system
-│   └── loader.py        # Data loader
-├── data/                # Data files
-│   ├── cards.json       # Execution card data
-│   ├── rivens.json      # Riven execution card data
-│   ├── specials.json    # Special execution card data
-│   └── weapons.json     # Weapon data
-├── tools/               # Utility scripts
-│   └── weapon_my_ocr.py # OCR recognition tool
-├── ui/                  # User interface
-│   ├── components/      # UI components
-│   ├── edit_riven_page.py    # Riven card editor page
-│   ├── home_page.py          # Home page
-│   ├── main_window.py        # Main window
-│   └── weapon_build_page.py  # Weapon loadout page
-└── start.py             # Program entry point
-```
+For a detailed list of dependencies, please see [requirements.txt](requirements.txt).
 
 ## 📋 TODO List
 
-Wait for 2.0 update! 
+Waiting for the 2.0 update. I will decide on further updates based on whether it's fun.
+
+*   [x] Calculation support for melee weapons.
+*   [x] Calculation support for bows, launchers, etc.
+*   [x] Equivalent magazine capacity calculation for weapons with unlimited ammo.
+*   [x] DPS calculation including weak point damage.
+*   [x] Skill damage support for some popular characters.
+*   [x] Support for changes in version 2.0.

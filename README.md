@@ -1,6 +1,6 @@
-# IntoTheVoidToolBox：《驱入虚空》工具箱
+# IntoTheVoidToolBox — 《驱入虚空》工具箱
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 
 [English](README_en.md) | [中文](README.md)
@@ -13,15 +13,21 @@
 
 **免责声明**：本工具为个人开发，与《驱入虚空》开发商杭州紧张树科技有限公司没有任何联系。
 
-## ✨ 功能页简介
+## ✨ 功能简介
 
 ### 🔫 武器执行卡配装
 
 在此处安装和卸载执行卡，尝试不同的执行卡搭配，选择不同的伤害计算方式以查看执行卡的提升幅度。
 
+目前只支持步枪、手枪和霰弹枪三种武器类型的执行卡配装。弓、发射器因其蓄力机制，暂不支持；近战因其既无弹药消耗，也无多重射击机制，还有剑气系攻击方式，暂不支持。
+
+注意，此处的伤害计算仅考虑了一个弹匣内的输出，对于触发低的武器，因元素异常造成的Dps有偏差，对于弹容量低的武器，因暴击等随机数造成的Dps亦存在偏差；同时亦未考虑异常持续时间，故触发低、弹容量大的武器，亦有可能被高估Dps。
+
 ### 💎 自制混淆执行卡编辑器
 
 可录入自定义的混淆执行卡，帮助计算执行卡收益。
+
+未限制其词缀类型和加成范围，可以考虑通过录入特殊的混淆执行卡来来模拟其他卡牌的效果，例如机枪的以战养战。
 
 ## 🎯 使用方法
 
@@ -57,40 +63,13 @@
 
 详细依赖列表请参见 [requirements.txt](requirements.txt)。
 
-## 🛠️ 开发说明
-
-### 项目结构
-
-```
-IntoTheVoidToolBox/
-├── assets/              # 资源文件
-│   ├── images/          # 轮播图图片
-│   ├── splash/          # 启动画面
-│   └── ui/              # UI 素材
-├── core/                # 核心业务逻辑
-│   ├── ivtcard.py       # 执行卡数据结构
-│   ├── ivtcontext.py    # 全局上下文管理
-│   ├── ivtdps.py        # 伤害计算引擎
-│   ├── ivtenum.py       # 枚举类型定义
-│   ├── ivtproperty.py   # 属性系统
-│   ├── ivtweapon.py     # 武器系统
-│   └── loader.py        # 数据加载器
-├── data/                # 数据文件
-│   ├── cards.json       # 执行卡数据
-│   ├── rivens.json      # 混淆执行卡数据
-│   ├── specials.json    # 特殊执行卡数据
-│   └── weapons.json     # 武器数据
-├── tools/               # 工具脚本
-│   └── weapon_my_ocr.py # OCR 识别工具
-├── ui/                  # 用户界面
-│   ├── components/      # UI 组件
-│   ├── edit_riven_page.py    # 混淆执行卡编辑页面
-│   ├── home_page.py          # 主页
-│   ├── main_window.py        # 主窗口
-│   └── weapon_build_page.py  # 武器配装页面
-└── start.py             # 程序入口
-```
-
 ## 📋 TODO 列表
 
-等待2.0更新再说
+等待2.0更新，视其是否好玩，我再做更新决定。
+
+- [x] 近战类武器的计算支持
+- [x] 弓、发射器等武器的计算支持
+- [x] 无限制弹容类武器的等效弹容计算
+- [x] 计入弱点伤害的Dps计算
+- [x] 部分热门角色的技能伤害支持
+- [x] 2.0版本改动支持
