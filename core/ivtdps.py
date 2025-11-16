@@ -10,6 +10,7 @@ import copy
 
 CRITICAL_RNG = 0.0
 TRIGGER_RNG = 0.0
+HEADSHOT_RNG = 0.0
 
 class MoveState:
     '''
@@ -58,6 +59,7 @@ class TargetInfo:
         self.material = EnemyMaterial.Void
         self.armor = 3430.0
         self.skillDebuff = {}
+        self.headShotRate = 0.0
         for skillDebuff in SkillDebuff:
             self.skillDebuff[skillDebuff] = 0
     
@@ -228,6 +230,8 @@ class DPSRequest:
         self.damageOnGui = self.weapon.snapshot.getTotalDamageArray().sum() # 面板伤害
         self.firstCriticalDamage = 0.0
         self.firstUncriticalDamage = 0.0
+        self.firstCriticalDamageHeadshot = 0.0
+        self.firstUncriticalDamageHeadshot = 0.0
         self.magazineDps = 0
         self.magazineDamage = 0
         self.averageDps = 0
@@ -282,9 +286,10 @@ class DPSRequest:
         weaponDamage = finalSnapshot.getTotalDamageArray()
         self.damageOnGui = weaponDamage.sum()
         # 初始化随机数
-        global CRITICAL_RNG, TRIGGER_RNG
+        global CRITICAL_RNG, TRIGGER_RNG, HEADSHOT_RNG
         CRITICAL_RNG = 0.0
         TRIGGER_RNG = 0.0
+        HEADSHOT_RNG = 0.0
         random.seed(0)
         # 清除元素异常
         self.targetInfo.elementDebuffState.clearDebuff()
@@ -305,29 +310,64 @@ class DPSRequest:
         criticalDamage = finalSnapshot.getPropertyValue(WeaponPropertyType.CriticalDamage) / 100.0
         # 计算触发率
         triggerChance = finalSnapshot.getPropertyValue(WeaponPropertyType.TriggerChance) / 100.0
-        # 计算首发暴击伤害和非暴击伤害
-        self.firstCriticalDamage = self._calculateDmageOnce(weaponDamage,
-                                                            externalDamageMultiplier=externalDamageMultiplier,
-                                                            criticalChance=criticalChance,
-                                                            criticalDamage=criticalDamage,
-                                                            triggerChance=triggerChance,
-                                                            criticalFlag=1,
-                                                            triggerFlag=-1)
-        self.firstUncriticalDamage = self._calculateDmageOnce(weaponDamage,
-                                                            externalDamageMultiplier=externalDamageMultiplier,
-                                                            criticalChance=criticalChance,
-                                                            criticalDamage=criticalDamage,
-                                                            triggerChance=triggerChance,
-                                                            criticalFlag=-1,
-                                                            triggerFlag=-1)
+        # 计算爆头伤害加成
+        headShot = finalSnapshot.getPropertyValue(WeaponPropertyType.Headshot) / 100.0
         for _ in range(totalShots):
             damageTaken += self._calculateDmageOnce(weaponDamage,
                                                     externalDamageMultiplier=externalDamageMultiplier,
                                                     criticalChance=criticalChance,
                                                     criticalDamage=criticalDamage,
                                                     triggerChance=triggerChance,
+                                                    headShot=headShot,
                                                     criticalFlag=0,
-                                                    triggerFlag=0)
+                                                    triggerFlag=0,
+                                                    headShotFlag=0)
+        
+        random.seed(0)
+        self.targetInfo.elementDebuffState.clearDebuff()
+        # 计算首发暴击伤害和非暴击伤害
+        self.firstCriticalDamage = self._calculateDmageOnce(weaponDamage,
+                                                            externalDamageMultiplier=externalDamageMultiplier,
+                                                            criticalChance=criticalChance,
+                                                            criticalDamage=criticalDamage,
+                                                            triggerChance=triggerChance,
+                                                            headShot=headShot,
+                                                            criticalFlag=1,
+                                                            triggerFlag=-1,
+                                                            headShotFlag=-1)
+        random.seed(0)
+        self.targetInfo.elementDebuffState.clearDebuff()
+        self.firstUncriticalDamage = self._calculateDmageOnce(weaponDamage,
+                                                            externalDamageMultiplier=externalDamageMultiplier,
+                                                            criticalChance=criticalChance,
+                                                            criticalDamage=criticalDamage,
+                                                            triggerChance=triggerChance,
+                                                            criticalFlag=-1,
+                                                            triggerFlag=-1,
+                                                            headShotFlag=-1)
+        random.seed(0)
+        self.targetInfo.elementDebuffState.clearDebuff()
+        self.firstCriticalDamageHeadshot = self._calculateDmageOnce(weaponDamage,
+                                                            externalDamageMultiplier=externalDamageMultiplier,
+                                                            criticalChance=criticalChance,
+                                                            criticalDamage=criticalDamage,
+                                                            triggerChance=triggerChance,
+                                                            headShot=headShot,
+                                                            criticalFlag=1,
+                                                            triggerFlag=-1,
+                                                            headShotFlag=1)
+        random.seed(0)
+        self.targetInfo.elementDebuffState.clearDebuff()
+        self.firstUncriticalDamageHeadshot = self._calculateDmageOnce(weaponDamage,
+                                                            externalDamageMultiplier=externalDamageMultiplier,
+                                                            criticalChance=criticalChance,
+                                                            criticalDamage=criticalDamage,
+                                                            triggerChance=triggerChance,
+                                                            headShot=headShot,
+                                                            criticalFlag=-1,
+                                                            triggerFlag=-1,
+                                                            headShotFlag=1)
+
         # 输出结果
         self.magazineDamage = damageTaken
         attackSpeed = finalSnapshot.getPropertyValue(WeaponPropertyType.AttackSpeed)
@@ -338,7 +378,7 @@ class DPSRequest:
 
     def _calculateDmageOnce(self, weaponDamage: np.ndarray, externalDamageMultiplier: float = 1.0, 
                             criticalChance: float = 0.0, criticalDamage: float = 0.0, triggerChance: float = 0.0,
-                            criticalFlag: int = 0, triggerFlag: int = 0) -> float:
+                            headShot : float = 0.0, criticalFlag: int = 0, triggerFlag: int = 0, headShotFlag: int = 0) -> float:
         '''
         计算单次伤害
         :param weaponDamage: 武器伤害数组
@@ -346,8 +386,10 @@ class DPSRequest:
         :param criticalChance: 暴击几率
         :param criticalDamage: 暴击伤害
         :param triggerChance: 触发几率
+        :param headShot: 爆头伤害加成
         :param criticalFlag: 暴击标志，-1表示强行不暴击，1表示强行暴击，0表示随机判定
         :param triggerFlag: 触发标志，-1表示强行不触发，1表示强行触发，0表示随机判定
+        :param headShotFlag: 爆头标志，-1表示强行不爆头，1表示强行爆头，0表示随机判定
         :return: 计算后的伤害值
         '''
         # 计算暴击倍率
@@ -389,6 +431,17 @@ class DPSRequest:
                 CRITICAL_RNG = math.fmod(CRITICAL_RNG, 1.0)
             else:
                 damageAfterReduction *= uncriticalMultiplier
+        # 计算是否爆头
+        global HEADSHOT_RNG
+        if headShotFlag == 1:
+            damageAfterReduction *= (1 + headShot)
+        elif headShotFlag == -1:
+            pass
+        else:
+            HEADSHOT_RNG += self.targetInfo.headShotRate
+            if HEADSHOT_RNG >= 1.0:
+                damageAfterReduction *= (1 + headShot)
+                HEADSHOT_RNG = math.fmod(HEADSHOT_RNG, 1.0)        
         # 计算外部伤害加成
         damageAfterReduction *= externalDamageMultiplier
         # 计算触发和持续伤害

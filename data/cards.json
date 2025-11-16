@@ -10,7 +10,7 @@
         "cardSet": "Ghost",
         "mainWeapon": "All",
         "subWeapon": "All",
-        "cost": 0,
+        "cost": 11,
         "slot": 3,
         "isPrime": false
     },
@@ -25,7 +25,7 @@
         "cardSet": "Reverse",
         "mainWeapon": "All",
         "subWeapon": "All",
-        "cost": 0,
+        "cost": 11,
         "slot": 0,
         "isPrime": false
     },
@@ -40,7 +40,7 @@
         "cardSet": "Bless",
         "mainWeapon": "All",
         "subWeapon": "All",
-        "cost": 0,
+        "cost": 11,
         "slot": 3,
         "isPrime": false
     },
@@ -85,7 +85,7 @@
         "cardSet": null,
         "mainWeapon": "Rifle",
         "subWeapon": "All",
-        "cost": 0,
+        "cost": 15,
         "slot": 0,
         "isPrime": false
     },
@@ -175,7 +175,7 @@
         "cardSet": null,
         "mainWeapon": "Rifle",
         "subWeapon": "All",
-        "cost": 0,
+        "cost": 14,
         "slot": 0,
         "isPrime": false
     },
@@ -190,7 +190,7 @@
         "cardSet": null,
         "mainWeapon": "Rifle",
         "subWeapon": "All",
-        "cost": 0,
+        "cost": 9,
         "slot": 0,
         "isPrime": false
     },
@@ -220,7 +220,7 @@
         "cardSet": null,
         "mainWeapon": "Rifle",
         "subWeapon": "All",
-        "cost": 0,
+        "cost": 9,
         "slot": 0,
         "isPrime": false
     },
@@ -235,7 +235,7 @@
         "cardSet": null,
         "mainWeapon": "Rifle",
         "subWeapon": "All",
-        "cost": 0,
+        "cost": 9,
         "slot": 0,
         "isPrime": false
     },
@@ -250,7 +250,7 @@
         "cardSet": null,
         "mainWeapon": "Rifle",
         "subWeapon": "All",
-        "cost": 0,
+        "cost": 9,
         "slot": 4,
         "isPrime": false
     },
@@ -265,7 +265,7 @@
         "cardSet": null,
         "mainWeapon": "Rifle",
         "subWeapon": "All",
-        "cost": 0,
+        "cost": 9,
         "slot": 0,
         "isPrime": false
     },
@@ -280,7 +280,7 @@
         "cardSet": null,
         "mainWeapon": "Rifle",
         "subWeapon": "All",
-        "cost": 0,
+        "cost": 9,
         "slot": 0,
         "isPrime": false
     },
@@ -427,7 +427,7 @@
         "cardSet": null,
         "mainWeapon": "Rifle",
         "subWeapon": "All",
-        "cost": 9,
+        "cost": 7,
         "slot": 0,
         "isPrime": false
     },
@@ -446,7 +446,7 @@
         "cardSet": null,
         "mainWeapon": "Rifle",
         "subWeapon": "All",
-        "cost": 9,
+        "cost": 7,
         "slot": 0,
         "isPrime": false
     },
@@ -465,7 +465,7 @@
         "cardSet": null,
         "mainWeapon": "Rifle",
         "subWeapon": "All",
-        "cost": 0,
+        "cost": 7,
         "slot": 0,
         "isPrime": false
     },
@@ -484,7 +484,7 @@
         "cardSet": null,
         "mainWeapon": "Rifle",
         "subWeapon": "All",
-        "cost": 0,
+        "cost": 7,
         "slot": 0,
         "isPrime": false
     },
@@ -499,8 +499,8 @@
         "cardSet": null,
         "mainWeapon": "Shotgun",
         "subWeapon": "All",
-        "cost": 0,
-        "slot": 0,
+        "cost": 15,
+        "slot": 3,
         "isPrime": true
     },
     {
@@ -514,7 +514,7 @@
         "cardSet": null,
         "mainWeapon": "Shotgun",
         "subWeapon": "All",
-        "cost": 0,
+        "cost": 16,
         "slot": 0,
         "isPrime": true
     },

@@ -1,5 +1,4 @@
-from PyQt5.QtWidgets import (QFrame, QVBoxLayout, QHBoxLayout, QLabel, QWidget, 
-                             QGridLayout, QSizePolicy)
+from PyQt5.QtWidgets import (QFrame, QVBoxLayout, QHBoxLayout, QWidget)
 from qfluentwidgets import (SubtitleLabel, CardWidget, ComboBox, SpinBox, CheckBox, 
                             PushButton, LineEdit, ScrollArea, TransparentToolButton,
                             MessageBox, StrongBodyLabel, InfoBar, InfoBarPosition, LineEdit)
@@ -71,8 +70,8 @@ class RivenPage(QFrame):
         self.weaponTypeLayout = QHBoxLayout()
         self.weaponTypeLabel = StrongBodyLabel('武器类型:', self)
         self.weaponCombo = AutocompletionComboBox()
-        self.weaponTypeLayout.addWidget(self.weaponTypeLabel)
-        self.weaponTypeLayout.addWidget(self.weaponCombo)
+        self.weaponTypeLayout.addWidget(self.weaponTypeLabel, 1)
+        self.weaponTypeLayout.addWidget(self.weaponCombo, 1)
 
         self.rivenRangeLayout = QHBoxLayout()
         self.rivenRangeLabel = StrongBodyLabel('正负增益数量:', self)

@@ -167,15 +167,23 @@ def _load_weapon_data():
         basename = weaponData['basename']
 
         # 解析属性
+        # 对于弱点伤害属性需要特殊处理，确保每把武器都有该属性
         properties = []
+        bSetHeadshot = False
         for propData in weaponData.get('properties', []):
             try:
                 propertyType = WeaponPropertyType[propData['type']]
                 propertyValue = propData['value']
-                properties.append(WeaponProperty.createBaseProperty(propertyType, propertyValue))
+                if propertyType == WeaponPropertyType.Headshot:
+                    properties.append(WeaponProperty.createBasePropertyWithAddon(propertyType, 100.0, propertyValue))
+                    bSetHeadshot = True
+                else:
+                    properties.append(WeaponProperty.createBaseProperty(propertyType, propertyValue))
             except (KeyError, ValueError) as e:
                 print(f"警告: 在武器 '{name}' 中遇到未知的属性类型 '{propData.get('type')}'。已跳过。")
                 continue
+        if not bSetHeadshot:
+            properties.append(WeaponProperty.createBasePropertyWithAddon(WeaponPropertyType.Headshot, 100.0, 0.0))
 
 
         weapon = Weapon(

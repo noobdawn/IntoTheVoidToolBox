@@ -152,19 +152,20 @@ class WeaponPropertyCard(CardWidget):
 
         weapon = request.weapon
 
-        self._addPropertyLabel('首发暴击伤害', request.firstCriticalDamage, tooltip='若暴击率超过100%则为下一等级暴击伤害')
-        self._addPropertyLabel('首发非暴击伤害', request.firstUncriticalDamage, tooltip='若暴击率超过100%则为原等级暴击伤害')
-        self._addPropertyLabel('单次爆发伤害量', request.magazineDamage, tooltip='单个弹匣造成的总伤害')
-        self._addPropertyLabel('单次爆发DPS', request.magazineDps, tooltip='单个弹匣造成的每秒伤害')
-        self._addPropertyLabel('平均DPS', request.averageDps, tooltip='计入换弹时间后的每秒伤害')
-
+        self._addPropertyLabel('首发暴击伤害', f"{request.firstCriticalDamage:.1f}", tooltip='若暴击率超过100%则为下一等级暴击伤害')
+        self._addPropertyLabel('首发非暴击伤害', f"{request.firstUncriticalDamage:.1f}", tooltip='若暴击率超过100%则为原等级暴击伤害')
+        self._addPropertyLabel('首发暴击弱点伤害', f"{request.firstCriticalDamageHeadshot:.1f}", tooltip='部位默认弱点倍率为100%')
+        self._addPropertyLabel('首发非暴击弱点伤害', f"{request.firstUncriticalDamageHeadshot:.1f}", tooltip='部位默认弱点倍率为100%')
+        self._addPropertyLabel('单次爆发伤害量', f"{request.magazineDamage:.1f}", tooltip='单个弹匣造成的总伤害')
+        self._addPropertyLabel('单次爆发DPS', f"{request.magazineDps:.1f}", tooltip='单个弹匣造成的每秒伤害')
+        self._addPropertyLabel('平均DPS', f"{request.averageDps:.1f}", tooltip='计入换弹时间后的每秒伤害')
         damage = request.finalSnapshot.getTotalDamageArray().sum()
-        self._addPropertyLabel('面板总伤害', damage, tooltip='武器面板伤害，计入魈鬼系列卡牌的元素转化')
+        self._addPropertyLabel('面板总伤害', f"{damage:.1f}", tooltip='武器面板伤害，计入魈鬼系列卡牌的元素转化')
 
         for weaponPropType in WeaponPropertyType:
             value = request.finalSnapshot.getPropertyValue(weaponPropType)
             if value != 0:
-                self._addPropertyLabel(str(weaponPropType), value)
+                self._addPropertyLabel(str(weaponPropType), f"{value:.1f}")
 
 class TargetSettingCard(FoldableCardWidget):
     '''
@@ -248,6 +249,23 @@ class TargetSettingCard(FoldableCardWidget):
             checkbox.stateChanged.connect(self._onTargetSettingChanged)
 
         contentLayout.addLayout(self.skillDebuffLayout)
+
+        # 弱点命中率
+        self.headShotLayout = QHBoxLayout()
+        self.headShotLabel = QLabel("弱点命中率")
+        self.headShotSpinBox = SpinBox()
+        self.headShotSpinBox.setRange(0, 100)
+        self.headShotSpinBox.setValue(0)
+        self.headShotInfoLabel = QLabel(self)
+        self.headShotInfoLabel.setPixmap(FIF.INFO.icon().pixmap(16, 16))
+        self.headShotInfoLabel.setToolTip("部分枪械的弱点伤害加成影响很大，建议根据实际情况设置")
+        self.headShotInfoLabel.setToolTipDuration(0)
+        self.headShotLayout.addWidget(self.headShotLabel)
+        self.headShotLayout.addStretch(1)
+        self.headShotLayout.addWidget(self.headShotInfoLabel)
+        self.headShotLayout.addWidget(self.headShotSpinBox)
+        contentLayout.addLayout(self.headShotLayout)
+        self.headShotSpinBox.valueChanged.connect(self._onTargetSettingChanged)
 
         self.applyButton = PushButton(FIF.SAVE,'应用', self)
         self.applyButton.clicked.connect(self._onApplyClicked)
@@ -627,6 +645,9 @@ class WeaponBuildPage(QFrame):
         skillDebuffInfo = self.targetSettingCard.getSkillDebuff()
         for skillDebuff, value in skillDebuffInfo:
             dpsRequest.targetInfo.addSkillDebuff(skillDebuff, value)
+        # 弱点命中率
+        headShotRate = self.targetSettingCard.headShotSpinBox.value() / 100.0
+        dpsRequest.targetInfo.headShotRate = headShotRate
         # 通知计算完成
         CONTEXT.triggerDpsCalculation(dpsRequest)
 

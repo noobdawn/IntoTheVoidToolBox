@@ -1,5 +1,4 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel
-from PyQt5.QtCore import Qt, pyqtSignal
 from qfluentwidgets import CardWidget, SubtitleLabel
 
 class FoldableCardWidget(CardWidget):
@@ -22,7 +21,7 @@ class FoldableCardWidget(CardWidget):
         # Header
         self.header_widget = QWidget(self)
         self.header_widget.setObjectName('header')
-        self.header_widget.setFixedHeight(40)
+        self.header_widget.setFixedHeight(50)
         self.header_layout = QHBoxLayout(self.header_widget)
         self.header_layout.setContentsMargins(20, 10, 20, 10)
         self.header_layout.setSpacing(10)
@@ -71,7 +70,7 @@ class FoldableCardWidget(CardWidget):
         self.content_widget.setVisible(self._is_expanded)
         self.collapse_label.setVisible(self._is_expanded)
         self.toggle_label.setVisible(not self._is_expanded)
-        self.header_widget.setFixedHeight(40 if self._is_expanded else 50)
+        self.header_widget.setFixedHeight(50)
         self.adjustSize()
         if self.parentWidget():
             self.parentWidget().adjustSize()
