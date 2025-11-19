@@ -1980,7 +1980,7 @@
             },
             {
                 "type": "MagazineSize",
-                "value": 100
+                "value": -1
             }
         ]
     },
@@ -2025,7 +2025,7 @@
             },
             {
                 "type": "MagazineSize",
-                "value": 100
+                "value": -1
             }
         ]
     },

@@ -10,7 +10,8 @@ from ui.components.card_slot import CardSlot
 from ui.components.seamless_scroll_area import SeamlessScrollArea
 
 from core.ivtcontext import CONTEXT
-from core.ivtenum import (WeaponPropertyType, EnemyMaterial, DamageType, SkillDebuff, AvailableCardSets, CardSet, CharacterPropertyType)
+from core.ivtenum import (WeaponPropertyType, EnemyMaterial, DamageType, SkillDebuff, AvailableCardSets, CardSet,
+                          SubWeaponType, CharacterPropertyType)
 from core.ivtdps import DPSRequest
 from core.ivtweapon import Weapon
 from core.ivtcard import WeaponCardBase
@@ -84,6 +85,7 @@ class WeaponPropertyCard(CardWidget):
         self.dpsMethodLayout = QHBoxLayout()
         self.dpsMethodLabel = QLabel("执行卡提升统计方法:")
         self.dpsMethodComboBox = ComboBox()
+        self.dpsMethodComboBox.addItem("单发期望伤害")
         self.dpsMethodComboBox.addItem("单次爆发伤害量")
         self.dpsMethodComboBox.addItem("单次爆发DPS")
         self.dpsMethodComboBox.addItem("平均DPS")

@@ -69,7 +69,7 @@ Waiting for the 2.0 update. I will decide on further updates based on whether it
 
 *   [x] Calculation support for melee weapons.
 *   [x] Calculation support for bows, launchers, etc.
-*   [x] Equivalent magazine capacity calculation for weapons with unlimited ammo.
-*   [x] DPS calculation including weak point damage.
+*   [√] Equivalent magazine capacity calculation for weapons with unlimited ammo.
+*   [√] DPS calculation including weak point damage.
 *   [x] Skill damage support for some popular characters.
 *   [x] Support for changes in version 2.0.

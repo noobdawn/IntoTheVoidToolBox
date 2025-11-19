@@ -7,7 +7,7 @@ from .seamless_scroll_area import SeamlessScrollArea
 import copy
 
 from core.ivtcard import WeaponCardCommon, WeaponCardRiven, WeaponCardSpecial
-from core.ivtenum import WeaponType,  SubWeaponType
+from core.ivtenum import WeaponType, SubWeaponType, WeaponPropertyType
 from core.ivtweapon import Weapon
 from core.ivtcontext import CONTEXT
 from core.ivtdps import DPSRequest
@@ -109,8 +109,14 @@ class CardArea(CardWidget):
                 newRequest.cards[slotIndex] = card
                 newRequest.calculate()
                 if self.dpsMethod == 0:
-                    priority = (newRequest.magazineDamage - request.magazineDamage) / request.magazineDamage
+                    lastcriticalChance = request.finalSnapshot.getPropertyValue(WeaponPropertyType.CriticalChance) / 100.0
+                    lastDamage = request.firstCriticalDamage * lastcriticalChance + request.firstUncriticalDamage * (1 - lastcriticalChance)
+                    newcriticalChance = newRequest.finalSnapshot.getPropertyValue(WeaponPropertyType.CriticalChance) / 100.0
+                    newDamage = newRequest.firstCriticalDamage * newcriticalChance + newRequest.firstUncriticalDamage * (1 - newcriticalChance)
+                    priority = (newDamage - lastDamage) / lastDamage
                 elif self.dpsMethod == 1:
+                    priority = (newRequest.magazineDamage - request.magazineDamage) / request.magazineDamage
+                elif self.dpsMethod == 2:
                     priority = (newRequest.magazineDps - request.magazineDps) / request.magazineDps
                 else:
                     priority = (newRequest.averageDps - request.averageDps) / request.averageDps

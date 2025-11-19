@@ -297,7 +297,25 @@ class DPSRequest:
         damageTaken = 0.0
         # 计算实际发射的子弹数
         magazine = finalSnapshot.getPropertyValue(WeaponPropertyType.MagazineSize)
+        magazine = math.floor(magazine)
+        # 如果子弹容量为-1，则说明这是无弹药限制武器，视情况进行等效
+        # 近战武器等效为10
+        # 弓、发射器等效为15
+        # 机枪等效为100
+        # 其他等效为30
+        if magazine < 0:
+            if self.weapon.subWeaponType == SubWeaponType.Kitana:
+                magazine = 10
+            elif self.weapon.subWeaponType in [SubWeaponType.Bow, SubWeaponType.RocketLauncher]:
+                magazine = 15
+            elif self.weapon.subWeaponType == SubWeaponType.MachineGun:
+                magazine = 100
+            else:
+                magazine = 30
         multiStrike = finalSnapshot.getPropertyValue(WeaponPropertyType.MultiStrike)
+        # 兼容近战，至少造成一次伤害
+        if multiStrike <= 0:
+            multiStrike = 1.0
         totalShots = int(magazine * multiStrike)
         # 计算外部伤害加成
         externalDamageMultiplier = GetExternalDamageMultiplier(
