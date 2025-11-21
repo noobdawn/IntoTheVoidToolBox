@@ -49,7 +49,7 @@ class WeaponSelectCard(CardWidget):
         weapon = CONTEXT.getWeaponByName(weaponName)
         if weapon:
             CONTEXT.uiSignals.weaponChanged.emit(weapon)
-            request = DPSRequest(weapon, [None]*9)
+            request = DPSRequest(weapon, [None]*9, context=CONTEXT)
             CONTEXT.triggerDpsCalculation(request)
 
     def afterInit(self):
@@ -498,7 +498,7 @@ class CardSlotCard(CardWidget):
         from PyQt5.QtCore import QSize
         
         if not self.cardSlots:
-            return super().sizeHint()
+            return super().sizeHint() 
         
         # 获取单个卡槽的尺寸
         slotSize = self.cardSlots[0].sizeHint()
@@ -510,7 +510,8 @@ class CardSlotCard(CardWidget):
         # 计算高度: 卡槽高度 + 上下边距
         height = slotSize.height() + margins.top() + margins.bottom()
         
-        return QSize(width, height)
+        uiScale = CONTEXT.getUiScale()
+        return QSize(int(width * uiScale), int(height * uiScale))
     
     def minimumSizeHint(self):
         '''
@@ -623,7 +624,7 @@ class WeaponBuildPage(QFrame):
         '''
         weapon = self.weaponSelectCard.getWeapon()
         cards = self.cardSlotCard.getCards()
-        dpsRequest = DPSRequest(weapon, cards)
+        dpsRequest = DPSRequest(weapon, cards, context=CONTEXT)
         # 移动状态
         dpsRequest.moveState.isMoving = self.characterSettingCard.getIsMoving()
         dpsRequest.moveState.isInAir = self.characterSettingCard.getIsInAir()

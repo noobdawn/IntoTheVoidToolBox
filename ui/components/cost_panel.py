@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtGui import QPixmap, QPainter
+from core.ivtcontext import CONTEXT
 
 class CostPanel(QWidget):
     """
@@ -8,7 +9,8 @@ class CostPanel(QWidget):
     def __init__(self, pixmap_path, parent=None):
         super().__init__(parent)
         self.pixmap = QPixmap(pixmap_path)
-        self.setFixedSize(66, 25)
+        uiScale = CONTEXT.getUiScale()
+        self.setFixedSize(int(66 * uiScale), int(25 * uiScale))
 
     def paintEvent(self, event):
         painter = QPainter(self)

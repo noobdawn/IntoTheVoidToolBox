@@ -1,7 +1,7 @@
 import json
 import os
 from .ivtcard import WeaponCardCommon, WeaponCardRiven, WeaponCardSpecial
-from .ivtenum import WeaponPropertyType, WeaponType, SubWeaponType, CardSet, Slot
+from .ivtenum import WeaponPropertyType, WeaponType, SubWeaponType, CardSet, Slot, SubWeaponTypeToMagazine
 from .ivtproperty import WeaponProperty
 from .ivtweapon import Weapon
 
@@ -299,4 +299,56 @@ def delete_riven_card(card: WeaponCardRiven) -> bool:
         return True
     except IOError as e:
         print(f"保存混淆执行卡数据失败: {e}")
+        return False
+    
+class Config:
+    '''
+    全局配置类，保存应用配置
+    '''
+    def __init__(self):
+        self.uiScale = 1.0  # 界面缩放比例
+        self.subWeaponTypeMagazine = SubWeaponTypeToMagazine.copy()
+
+CONFIG_INI_PATH = 'data/config.ini'
+CONFIG = Config()
+
+def load_config():
+    global CONFIG
+    if not os.path.exists(CONFIG_INI_PATH):
+        save_config(CONFIG)
+        return CONFIG
+    try:
+        with open(CONFIG_INI_PATH, 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+            for line in lines:
+                kv = line.strip().split('=')
+                if len(kv) != 2:
+                    continue
+                key = kv[0].strip()
+                value = kv[1].strip()
+                if key == 'uiScale':
+                    CONFIG.uiScale = float(value)
+                if key.startswith('subWeaponTypeMagazine_'):
+                    subWeaponTypeStr = key[len('subWeaponTypeMagazine_'):]
+                    try:
+                        subWeaponType = SubWeaponType[subWeaponTypeStr]
+                        CONFIG.subWeaponTypeMagazine[subWeaponType] = int(value)
+                    except KeyError:
+                        continue
+    except (FileNotFoundError, ValueError) as e:
+        print(f"加载配置失败: {e}")
+    return CONFIG
+
+def save_config(config : Config):
+    '''
+    保存配置
+    '''
+    try:
+        with open(CONFIG_INI_PATH, 'w', encoding='utf-8') as file:
+            file.write(f"uiScale={config.uiScale}\n")
+            for subWeaponType, magazine in config.subWeaponTypeMagazine.items():
+                file.write(f"subWeaponTypeMagazine_{subWeaponType.name}={magazine}\n")
+        return True
+    except IOError as e:
+        print(f"保存配置失败: {e}")
         return False

@@ -220,7 +220,7 @@ class DPSRequest:
     发起一次DPS计算请求所需的所有信息
     包括武器基本信息、所有的卡牌、角色信息和环境信息
     '''
-    def __init__(self, weapon: Weapon, cards: list[WeaponCardWithProperty]):
+    def __init__(self, weapon: Weapon, cards: list[WeaponCardWithProperty], context: 'IVTContext' = None):
         self.weapon = weapon
         self.cards = cards
         self.moveState = MoveState()
@@ -236,6 +236,7 @@ class DPSRequest:
         self.magazineDamage = 0
         self.averageDps = 0
         self.finalSnapshot = None
+        self.context = context
 
     '''
     从一个DPSRequest创建一个新的DPSRequest
@@ -243,7 +244,7 @@ class DPSRequest:
     '''
     @classmethod
     def createNewOne(cls, other: 'DPSRequest') -> 'DPSRequest':
-        newRequest = cls(weapon=other.weapon, cards=copy.deepcopy(other.cards))
+        newRequest = cls(weapon=other.weapon, cards=copy.deepcopy(other.cards), context=other.context)
         newRequest.moveState = other.moveState
         newRequest.cardSetInfo = other.cardSetInfo
         newRequest.characterInfo = other.characterInfo
@@ -304,14 +305,7 @@ class DPSRequest:
         # 机枪等效为100
         # 其他等效为30
         if magazine < 0:
-            if self.weapon.subWeaponType == SubWeaponType.Kitana:
-                magazine = 10
-            elif self.weapon.subWeaponType in [SubWeaponType.Bow, SubWeaponType.RocketLauncher]:
-                magazine = 15
-            elif self.weapon.subWeaponType == SubWeaponType.MachineGun:
-                magazine = 100
-            else:
-                magazine = 30
+            magazine = self.context.getSubWeaponTypeMagazine(self.weapon.subWeaponType)
         multiStrike = finalSnapshot.getPropertyValue(WeaponPropertyType.MultiStrike)
         # 兼容近战，至少造成一次伤害
         if multiStrike <= 0:

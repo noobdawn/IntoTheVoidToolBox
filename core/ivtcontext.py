@@ -1,10 +1,11 @@
 from PyQt5.QtCore import QObject, pyqtSignal
 from pynput import keyboard
-from .loader import load_cards, load_weapons, delete_riven_card, save_riven_card
+from .loader import load_cards, load_weapons, delete_riven_card, save_riven_card, load_config, save_config
 
 from .ivtdps import DPSRequest
 from .ivtweapon import Weapon
 from .ivtcard import WeaponCardRiven, WeaponCardBase
+from .ivtenum import SubWeaponType, SubWeaponTypeToMagazine
 
 class UISignals(QObject):
     '''
@@ -49,6 +50,7 @@ class IVTContext:
     def __init__(self):
         self.uiSignals = UISignals()
         self.hotkeyListener = HotkeyListener()
+        self.config = load_config()
         
         self._allCards = load_cards()
         self._allWeapons = load_weapons()
@@ -56,11 +58,12 @@ class IVTContext:
         # 检查所有武器数据是否正确
         for weapon in self._allWeapons:
             print(f"初始化武器: {weapon.name}")
-            dpsReq = DPSRequest(weapon, [])
+            dpsReq = DPSRequest(weapon, [], context=self)
             dpsReq.calculate()
 
         self._lastDPSRequest: DPSRequest | None = None
 
+#region 执行卡相关
     def getAllCards(self) -> list[WeaponCardBase]:
         '''
         获取所有执行卡
@@ -115,5 +118,34 @@ class IVTContext:
         self._lastDPSRequest = request
         request.calculate()
         self.uiSignals.dpsResultCompleted.emit(request)
+#endregion
+
+#region 配置相关
+    def getUiScale(self) -> float:
+        '''
+        获取界面缩放比例
+        '''
+        return self.config.uiScale
+    
+    def setUiScale(self, scale: float):
+        '''
+        设置界面缩放比例
+        '''
+        self.config.uiScale = scale
+        save_config(self.config)
+
+    def getSubWeaponTypeMagazine(self, subWeaponType: SubWeaponType) -> int:
+        '''
+        获取子武器类型的弹匣容量等效值
+        '''
+        return self.config.subWeaponTypeMagazine.get(subWeaponType, 30)
+    
+    def setSubWeaponTypeMagazine(self, subWeaponType: SubWeaponType, magazine: int):
+        '''
+        设置子武器类型的弹匣容量等效值
+        '''
+        self.config.subWeaponTypeMagazine[subWeaponType] = magazine
+        save_config(self.config)
+#endregion
 
 CONTEXT = IVTContext()

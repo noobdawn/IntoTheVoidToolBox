@@ -379,6 +379,19 @@ WeaponTypeToSubTypes = {
 	WeaponType.Pistol: [SubWeaponType.AutoPistol, SubWeaponType.MicroSubmachineGun]
 }
 
+SubWeaponTypeToMagazine = {
+	SubWeaponType.AssaultRifle: 30,
+	SubWeaponType.SniperRifle: 5,
+	SubWeaponType.MachineGun: 100,
+	SubWeaponType.LaserGun: 50,
+	SubWeaponType.Shotgun: 8,
+	SubWeaponType.RocketLauncher: 10,
+	SubWeaponType.Bow: 10,
+	SubWeaponType.Kitana: 10,
+	SubWeaponType.AutoPistol: 15,
+	SubWeaponType.MicroSubmachineGun: 30
+}
+
 @unique
 class Hero(Enum):
 	'''

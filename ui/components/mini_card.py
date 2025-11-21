@@ -14,7 +14,8 @@ class MiniCard(QWidget):
     '''
     def __init__(self, card: WeaponCardBase, parent=None):
         super().__init__(parent)
-        self.setFixedSize(124, 128)
+        uiScale = CONTEXT.getUiScale()
+        self.setFixedSize(int(124 * uiScale), int(128 * uiScale))
         
         self.costPanel = CostPanel('assets/ui/costpanel.png', self)
         self.costLayout = QHBoxLayout(self.costPanel)
@@ -22,7 +23,7 @@ class MiniCard(QWidget):
         self.costLayout.setSpacing(0)
         
         self.slotLabel = QLabel(self.costPanel)
-        self.slotLabel.setFixedSize(30, 30)
+        self.slotLabel.setFixedSize(int(30 * uiScale), int(30 * uiScale))
         self.slotLabel.setScaledContents(True)
         self.costLayout.addWidget(self.slotLabel)
 
@@ -67,8 +68,9 @@ class MiniCard(QWidget):
             slotPixmap = QPixmap(slotPixmapPath)
             self.slotLabel.setPixmap(slotPixmap)
             slotPixmapSize = self.slotLabel.size()
-            self.slotLabel.setFixedHeight(20)
-            self.slotLabel.setFixedWidth(20 * slotPixmap.width() // slotPixmap.height())
+            uiScale = CONTEXT.getUiScale()
+            self.slotLabel.setFixedHeight(int(20 * uiScale))
+            self.slotLabel.setFixedWidth(int(20 * uiScale) * slotPixmap.width() // slotPixmap.height())
 
             self.nameLabel.setText(card.name)
             tooltipText = None

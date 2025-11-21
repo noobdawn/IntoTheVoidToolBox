@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QFrame, QVBoxLayout, QApplication
 from ui.home_page import HomePage
 from ui.weapon_build_page import WeaponBuildPage
 from ui.edit_riven_page import RivenPage
-# from ui.config_page import ConfigPage
+from ui.settings_page import SettingsPage
 
 class MainWindow(FluentWindow):
     """
@@ -25,17 +25,17 @@ class MainWindow(FluentWindow):
         self.home_page = HomePage(self)
         self.weapon_build_page = WeaponBuildPage(self)
         self.edit_riven_page = RivenPage(self)
-        # self.config_page = ConfigPage(self)
+        self.settings_page = SettingsPage(self)
 
         self.home_page.setObjectName("homePage")
         self.weapon_build_page.setObjectName("weaponBuildPage")
         self.edit_riven_page.setObjectName("editRivenPage")
-        # self.config_page.setObjectName("configPage")
+        self.settings_page.setObjectName("settingsPage")
         
         self.addSubInterface(self.home_page, FIF.HOME, "首页", position=NavigationItemPosition.TOP)
         self.addSubInterface(self.weapon_build_page, FIF.DEVELOPER_TOOLS, "武器配卡", position=NavigationItemPosition.TOP)
         self.addSubInterface(self.edit_riven_page, FIF.EDIT, "混淆执行卡", position=NavigationItemPosition.TOP)
-        # self.addSubInterface(self.config_page, FIF.SETTING, "设置", position=NavigationItemPosition.BOTTOM)
+        self.addSubInterface(self.settings_page, FIF.SETTING, "设置", position=NavigationItemPosition.BOTTOM)
 
 
 
